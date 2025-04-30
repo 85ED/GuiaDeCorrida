@@ -1,6 +1,8 @@
-# 🏃 Guia de Corrida
+# Guia de Corrida
 
-![Logo do Guia de Corrida](https://github.com/85ED/GuiaDeCorrida/blob/main/Site/Guia%20de%20Corrida/img/logo_preto.png?raw=true)
+<p align="center">
+  <img src="https://github.com/85ED/GuiaDeCorrida/blob/main/Site/Guia%20de%20Corrida/img/logo_preto.png?raw=true" alt="Logo do Guia de Corrida" width="200"/>
+</p>
 
 ## Sobre o projeto
 
