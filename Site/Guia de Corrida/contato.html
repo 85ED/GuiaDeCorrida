@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GuiaDeCorrida</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header>
+    <div class="wrapper">
+      <div class="logo">
+        <a href="index.html"><img src="./img/logo.png" alt="Guia de Corrida"></a>
+      </div>
+      <nav>
+        <ul id="menu">
+          <li><a href="index.html#sobre">Sobre</a></li>
+          <li><a href="preparacao.html">Preparação</a></li>
+          <li><a href="execucao.html">Execução</a></li>
+          <li><a href="recuperacao.html">Recuperação</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+    </div>
+  </header>
+
+  <div style="display: flex; max-width: 800px; margin: auto;">
+    <div style="flex: 1;">
+      <img src="./img/3.jpg" alt="Caixa de Correio" style="max-width: 100%;">
+    </div>
+
+    <div style="flex: 1; padding: 20px;">
+      <h2>Fale Conosco</h2>
+      <form onsubmit="verificarFormulario(); return false;">
+        <label>Nome:</label><br>
+        <input type="text" name="nome"><br><br>
+        <label>Email:</label><br>
+        <input type="text" name="email"><br><br>
+        <label>Mensagem:</label><br>
+        <textarea name="mensagem" rows="4"></textarea><br><br>
+        <input type="submit" value="Enviar">
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <h2 style="color: white; font-size: 15px;">Projeto Desenvolvido por Edson Felix – SPTECH</h2>
+    <div class="redes">
+      <a href="https://www.linkedin.com/in/code85ed/" class="social-link" target="_blank" rel="noopener noreferrer">
+        LinkedIn<i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://github.com/85ED" class="social-link" target="_blank" rel="noopener noreferrer">
+        GitHub<i class="fab fa-git"></i>
+      </a>
+    </div>
+  </footer>
+
+</body>
+
+</html>
+
+<script>
+  function verificarFormulario() {
+    var nome = document.forms[0].nome.value;
+    var email = document.forms[0].email.value;
+    var mensagem = document.forms[0].mensagem.value;
+
+    if (nome == "" || email == "" || mensagem == "") {
+      alert("Por favor, preencha todos os campos.");
+    } else {
+      alert("Mensagem enviada com sucesso! Em breve entraremos em contato.");
+      nome.value = "";
+      email.value = "";
+      mensagem.value = "";
+    }
+  }
+</script>
