@@ -1,5 +1,5 @@
 <h1 align="left">
-  # Guia de Corrida
+  <h2>Guia de Corrida</h2>
   <img src="https://github.com/85ED/GuiaDeCorrida/blob/main/Site/Guia%20de%20Corrida/img/logo_preto.png?raw=true" alt="Logo" width="60" align="right">
 </h1>
 
