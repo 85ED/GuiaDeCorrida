@@ -1,9 +1,10 @@
-<h1 align="left">
-  <h2>Guia de Corrida</h2>
-  <img src="https://github.com/85ED/GuiaDeCorrida/blob/main/Site/Guia%20de%20Corrida/img/logo_preto.png?raw=true" alt="Logo" width="60" align="right" style="margin-top: -10px">
-</h1>
+# Guia de Corrida
 
 ## Sobre o projeto
+
+<p>
+  <img src="https://github.com/85ED/GuiaDeCorrida/blob/main/Site/Guia%20de%20Corrida/img/logo_preto.png?raw=true" alt="Logo do Guia de Corrida" width="200" align="right"/>
+</p>
 
 O **Guia de Corrida** é um site informativo voltado para entusiastas e iniciantes na corrida de rua. Ele reúne dicas práticas para quem deseja se preparar melhor, executar corretamente seus treinos e realizar uma boa recuperação.
 
