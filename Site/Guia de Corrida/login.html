@@ -13,8 +13,6 @@
   </style>
 </head>
 
-
-
 <body class="corpo">
   <hr size="4px" color="#0cc0df" class="linha-cima-cadastro" />
 
@@ -49,9 +47,6 @@
       <label class="label">Nome</label>
       <input type="text" class="input" id="iptNome">
 
-      <label class="label">CNPJ</label>
-      <input type="text" class="input" id="iptCNPJ" placeholder="XX.XXX.XXX/0001-XX">
-
       <label class="label">Email</label>
       <input type="text" class="input" id="iptEmail">
 
@@ -65,7 +60,7 @@
       <input type="password" class="input" id="iptConfirmacaoSenha">
 
       <label class="label">Código de confirmação</label>
-      <input type="text" class="input" id="iptCodigo" placeholder="ab3de">
+      <input type="text" class="input" id="iptCodigo" placeholder="informe um codigo">
 
       <button onclick="cadastro()" class="botao">CRIAR</button>
       <button onclick="mostrarLogin()" class="botao botao-jatenho-conta">JÁ POSSUO CADASTRO</button>
@@ -90,7 +85,6 @@
   <hr size="4px" color="#0cc0df" class="linha-baixo-cadastro" />
 
   <script>
-
     function mostrarLogin() {
       document.getElementById("formCadastro").classList.add("hidden");
       document.getElementById("formLogin").classList.remove("hidden");
@@ -103,26 +97,24 @@
 
     function cadastro() {
       const nome = iptNome.value.trim().toLowerCase();
-      const cnpj = iptCNPJ.value.trim();
       const email = iptEmail.value.trim();
       const telefone = iptTelefone.value.trim();
       const senha = iptSenha.value;
       const confirmacaoSenha = iptConfirmacaoSenha.value;
       const codigo = iptCodigo.value.trim().toLowerCase();
 
-      if (!nome || !cnpj || !email || !telefone || !senha || !confirmacaoSenha || !codigo) {
+      if (!nome || !email || !telefone || !senha || !confirmacaoSenha || !codigo) {
         return alert('Todos os campos precisam ser preenchidos!');
       }
 
       if (senha !== confirmacaoSenha) return alert('Senhas não coincidem.');
-      if (cnpj.length !== 14) return alert('CNPJ inválido!');
       if (telefone.length !== 11) return alert('Telefone inválido!');
       if (senha.length < 5) return alert('A senha precisa ter pelo menos 5 dígitos!');
-      if (codigo !== 'ab3de') return alert('Código inválido!');
       if (!email.includes("@")) return alert('Email inválido!');
+      if (codigo !== 'abc123') return alert('Código inválido!');
 
-      let todosIguais = [...cnpj].every(char => char === cnpj[0]);
-      if (todosIguais) return alert('Todos os números do CNPJ não podem ser iguais!');
+      const usuario = { nome, email, telefone, senha };
+      localStorage.setItem("usuario", JSON.stringify(usuario));
 
       alert('Cadastro realizado! Seja bem-vindo(a)!');
       mostrarLogin();
@@ -132,9 +124,15 @@
       const email = document.getElementById("loginEmail").value.trim();
       const senha = document.getElementById("loginSenha").value;
 
+      const usuario = JSON.parse(localStorage.getItem("usuario"));
+
       if (!email || !senha) return alert("Preencha email e senha!");
+      if (!usuario || usuario.email !== email || usuario.senha !== senha) {
+        return alert("Email ou senha inválidos!");
+      }
 
       alert("Login realizado com sucesso!");
+      // window.location.href = "criar minha pagina do login.html";
     }
   </script>
 
@@ -155,23 +153,12 @@
 </html>
 
 
+
 <!--
-to do:
-
-1. Nome – Nome completo da pessoa 
-2. CNPJ – Cadastro Nacional da Pessoa Jurídica (formato: XX.XXX.XXX/0001-XX).
-   • Deve conter 14 números e não pode conter todos os números iguais.
-3. Email – Deve conter o símbolo "@" e ser um e-mail válido.
-4. Telefone – Número de celular com DDD (formato: (XX)X XXXX-XXXX).
-   • Deve conter 11 números.
-5. Senha – Pelo menos 5 caracteres.
-6. Confirmação da Senha – Deve ser idêntica à senha digitada.
-7. Código de Confirmação – Deve ter exatamente 5 caracteres e ser igual a: ab3de
-
 Validações aplicadas:
 - Nenhum campo pode estar vazio.
 - Senha e confirmação devem coincidir.
 - CNPJ deve ser válido e não conter números todos iguais.
 - Telefone deve ter 11 dígitos válidos.
-- Código de confirmação deve ser exatamente "ab3de".
+- Código de confirmação deve ser exatamente "abc123".
 -->

@@ -230,3 +230,82 @@ footer a:hover {
     max-width: 500px;
     text-align: left;
 }
+
+
+.containerAllCadastro {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #fff;
+    max-width: 900px;
+    margin: 40px auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    gap: 40px;
+}
+
+.containerImagem {
+    flex: 1 1 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagem-logo-cadastro {
+    max-width: 100%;
+    height: auto;
+}
+
+.container-cadastro {
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.botao {
+    padding: 12px;
+    background-color: #ff7f00;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botao:hover {
+    background-color: #e67000;
+}
+
+.botao-jatenho-conta {
+    background-color: transparent;
+    color: #ff7f00;
+    border: 1px solid #ff7f00;
+}
+
+.botao-jatenho-conta:hover {
+    background-color: #ff7f00;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .containerAllCadastro {
+        flex-direction: column;
+        padding: 20px 10px;
+    }
+
+    .containerImagem,
+    .container-cadastro {
+        width: 100%;
+    }
+}
