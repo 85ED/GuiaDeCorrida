@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro e Login</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="./js/sessao.js"></script>
+</head>
+
+<body class="corpo">
+  <hr size="4px" color="#0cc0df" class="linha-cima-cadastro" />
+
+  <header>
+    <div class="wrapper">
+      <div class="logo">
+        <a href="index.html"><img src="./img/logo.png" alt="Guia de Corrida"></a>
+      </div>
+      <nav>
+        <ul id="menu">
+          <li><a href="index.html#sobre">Sobre</a></li>
+          <li><a href="preparacao.html">Preparação</a></li>
+          <li><a href="execucao.html">Execução</a></li>
+          <li><a href="recuperacao.html">Recuperação</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="login.html" class="botao-login">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="containerAll containerAllCadastro">
+    <div class="containerImagem">
+      <img src="./img/66.jpg" class="imagem-logo-cadastro" alt="Logo do site">
+    </div>
+
+    <!-- cadastro -->
+    <div class="container-cadastro" id="formCadastro">
+      <h1 class="titulo">Cadastro</h1>
+      <span class="linha-fina linha-fina-cadastro"></span>
+
+      <label class="label">Nome Completo</label>
+      <input type="text" class="input" id="iptNome">
+
+      <label class="label">E-mail</label>
+      <input type="text" class="input" id="iptEmail">
+
+      <label class="label">Telefone Celular</label>
+      <input type="text" class="input" id="iptTelefone" placeholder="(xx)x xxxx-xxxx">
+
+      <label class="label">Senha</label>
+      <input type="password" class="input" id="iptSenha">
+
+      <label class="label">Confirme a senha</label>
+      <input type="password" class="input" id="iptConfirmacaoSenha">
+
+      <button onclick="cadastro()" class="botao">CRIAR</button>
+      <button onclick="mostrarLogin()" class="botao botao-jatenho-conta">JÁ POSSUO CADASTRO</button>
+    </div>
+
+    <!-- login -->
+    <div class="container-cadastro hidden" id="formLogin">
+      <h1 class="titulo">Login</h1>
+      <span class="linha-fina linha-fina-cadastro"></span>
+
+      <label class="label">Email</label>
+      <input type="text" class="input" id="loginEmail">
+
+      <label class="label">Senha</label>
+      <input type="password" class="input" id="loginSenha">
+
+      <button onclick="fazerLogin()" class="botao">ENTRAR</button>
+      <button onclick="mostrarCadastro()" class="botao botao-jatenho-conta">VOLTAR AO CADASTRO</button>
+    </div>
+  </div>
+
+  <hr size="4px" color="#0cc0df" class="linha-baixo-cadastro" />
+
+  <script>
+    function mostrarLogin() {
+      document.getElementById("formCadastro").classList.add("hidden");
+      document.getElementById("formLogin").classList.remove("hidden");
+    }
+
+    function mostrarCadastro() {
+      document.getElementById("formLogin").classList.add("hidden");
+      document.getElementById("formCadastro").classList.remove("hidden");
+    }
+
+    async function cadastro() {
+      const dados = {
+        nome: document.getElementById("iptNome").value.trim(),
+        email: document.getElementById("iptEmail").value.trim(),
+        telefone: document.getElementById("iptTelefone").value.trim(),
+        senha: document.getElementById("iptSenha").value,
+        confirmacaoSenha: document.getElementById("iptConfirmacaoSenha").value
+      };
+
+      // Validações
+      if (!dados.nome || !dados.email || !dados.telefone || !dados.senha) {
+        return alert('Preencha todos os campos obrigatórios!');
+      }
+      if (dados.senha !== dados.confirmacaoSenha) {
+        return alert('As senhas não coincidem!');
+      }
+
+      try {
+        const response = await fetch('http://localhost:3000/usuarios/cadastrar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dados)
+        });
+
+        const resultado = await response.json();
+
+        if (!response.ok) throw resultado;
+
+        alert('Cadastro realizado com sucesso!');
+        mostrarLogin();
+      } catch (error) {
+        alert(error.error || 'Erro durante o cadastro');
+      }
+    }
+
+    async function fazerLogin() {
+      const dados = {
+        email: document.getElementById("loginEmail").value.trim(),
+        senha: document.getElementById("loginSenha").value
+      };
+
+      try {
+        const response = await fetch('http://localhost:3000/usuarios/autenticar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dados)
+        });
+
+        const resultado = await response.json();
+
+        if (resultado.success && resultado.usuario) {
+          sessionStorage.NOME_USUARIO = resultado.usuario.nome;
+          sessionStorage.EMAIL_USUARIO = resultado.usuario.email;
+          sessionStorage.ID_USUARIO = resultado.usuario.idUsuario;
+          window.location.href = "dashboard.html";
+        } else {
+          throw resultado;
+        }
+      } catch (error) {
+        alert(error.error || 'Falha no login');
+      }
+    }
+
+  </script>
+
+
+  <footer>
+    <h2 style="color: white; font-size: 15px;">Projeto Desenvolvido por Edson Felix – SPTECH</h2>
+    <h2 style="color: white; font-size: 15px;">Fale Conosco: edson.marques@sptech.school </h2>
+    <div class="redes">
+      <a href="https://www.linkedin.com/in/code85ed/" class="social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://github.com/85ED" class="social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-git"></i>
+      </a>
+    </div>
+  </footer>
+  
+</body>
+
+</html>
+
+
+
+</body>
+
+</html>

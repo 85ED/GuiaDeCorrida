@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal | Guia de Corrida</title>
+  <link rel="stylesheet" href="./css/dash_style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+  <script src="./js/sessao.js"></script>
+</head>
+
+<body onload="validarSessao();">
+  <header>
+    <div class="container cabecalho">
+      <img src="./img/logo_preto.png" alt="Guia de Corrida" class="logo-site" />
+      <p id="saudacao_usuario" class="saudacao-central"></p>
+      <div class="usuario-info">
+        <div class="info-usuario">
+          <p>Usuário: <span id="b_usuario"></span></p>
+          <p>Login: <span id="b_email"></span></p>
+          <p id="localizacao"></p>
+          <button class="botao-sair" onclick="limparSessao()">Sair</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="banner-prova">
+      <h2 id="proximo_desafio"></h2>
+      <select id="selecao_prova" placeholder="Digite para buscar uma prova...">
+        <option value="" disabled selected>Selecione uma prova</option>
+      </select>
+    </div>
+
+    <div class="estatisticas">
+      <div class="card">
+        <h3>Distância</h3>
+        <p id="distancia"></p>
+      </div>
+      <div class="card">
+        <h3>Ganho de Altimetria</h3>
+        <p id="altimetria"></p>
+      </div>
+      <div class="card">
+        <h3>Clima Previsto</h3>
+        <p id="temperatura"></p>
+      </div>
+      <div class="card">
+        <h3>Modalidade</h3>
+        <p id="modalidade"></p>
+      </div>
+    </div>
+
+    <div class="grafico-container">
+      <canvas id="graficoAltimetria"></canvas>
+    </div>
+
+    <div class="calculadora-pace">
+      <h2>Cálculos do Corredor</h2>
+      <div class="form-pace">
+        <div class="campo">
+          <label for="ipt_distancia">Distância (km):</label>
+          <input type="number" id="ipt_distancia" step="0.01" />
+        </div>
+        <div class="campo">
+          <label for="ipt_tempo">Tempo (minutos):</label>
+          <input type="number" id="ipt_tempo" step="0.01" />
+        </div>
+        <button onclick="calcularPace()">Calcular Pace</button>
+        <div id="txt" class="resultado"></div>
+      </div>
+    </div>
+
+    <div class="links-info">
+      <h2>Informações Sobre a Prova</h2>
+      <ul>
+        <li><a href="#">Equipamentos Obrigatórios</a></li>
+        <li><a href="#">Nutrição/Hidratação</a></li>
+        <li><a href="#">Clima Previsto</a></li>
+        <li><a href="#">Regulamento</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <!-- Link para JS externo -->
+  <script src="./js/graficos.js"></script>
+
+</body>
+
+</html>

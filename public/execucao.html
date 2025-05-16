@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Execução | Guia de Corrida</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Gotham:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <header>
+    <div class="wrapper">
+      <div class="logo">
+        <a href="index.html"><img src="./img/logo.png" alt="Guia de Corrida" /></a>
+      </div>
+      <nav>
+        <ul id="menu">
+          <li><a href="index.html#sobre">Sobre</a></li>
+          <li><a href="preparacao.html">Preparação</a></li>
+          <li><a href="execucao.html">Execução</a></li>
+          <li><a href="recuperacao.html">Recuperação</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="login.html" class="botao-login">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="conteudo">
+    <div class="wrapper">
+      <h2>Execução: correr com estratégia</h2>
+      <p>No dia da corrida ou durante treinos-chave, a execução faz toda a diferença. Saber administrar o ritmo,
+        respeitar os sinais do corpo e aplicar as estratégias certas pode significar uma prova bem-sucedida ou uma
+        experiência frustrante.</p>
+    </div>
+  </section>
+
+  <section class="processo_corrida">
+    <div class="wrapper bloco-processo">
+      <h2>Calculadora de Pace</h2>
+      <img src="./img/pace.avif" alt="Calculadora de pace" class="imagem-processo">
+      <p>Defina o ritmo ideal conforme a distância e seu objetivo de tempo.</p>
+      <!-- calculadora algoritimo pace -->
+      <h2>Descubra seu ritmo de corrida</h2>
+      Informe a distância (km): <input id="ipt_distancia"><br>
+      Informe o tempo total (minutos): <input id="ipt_tempo"><br><br>
+      <button onclick="pace()">Calcular Pace</button><br><br>
+      <div id="txt"></div>
+    </div>
+
+    <div class="wrapper bloco-processo">
+      <h2>Estratégia de Prova</h2>
+      <img src="./img/estrategia.jpg" alt="Estratégia de prova" class="imagem-processo">
+      <p>Saiba como dividir sua energia por trechos e lidar com subidas e descidas.</p>
+    </div>
+    <div class="wrapper bloco-processo">
+      <h2>Hidratação e Energia</h2>
+      <img src="./img/agua.avif" alt="Hidratação e géis" class="imagem-processo">
+      <p>Entenda o melhor momento para beber água e consumir géis ou isotônicos.</p>
+    </div>
+  </section>
+
+  <footer>
+    <h2 style="color: white; font-size: 15px;">Projeto Desenvolvido por Edson Felix – SPTECH</h2>
+    <h2 style="color: white; font-size: 15px;">Fale Conosco: edson.marques@sptech.school</h2>
+    <div class="redes">
+      <a href="https://www.linkedin.com/in/code85ed/" class="social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://github.com/85ED" class="social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-git"></i>
+      </a>
+    </div>
+    <p style="font-size: 12px; color: #ccc; margin-top: 10px;">
+      Algumas imagens neste site são licenciadas de <a href="https://www.istockphoto.com/" target="_blank"
+        rel="noopener noreferrer" style="color: #ccc;">iStock</a>.
+    </p>
+  </footer>
+</body>
+
+</html>
+
+<script>
+      function pace() {
+      var distancia = Number(ipt_distancia.value);
+      var tempo = Number(ipt_tempo.value);
+
+      if (distancia > 0 && tempo > 0) {
+        var pace_corrida = tempo / distancia;
+        var minutos = Math.floor(pace_corrida);
+        var segundos = Math.round((pace_corrida - minutos) * 60);
+
+        // segundos com 2 dígitos
+        segundos = segundos.toString().padStart(2, '0');
+
+        txt.innerHTML = `Seu pace é de <strong>${minutos}:${segundos} min/km</strong>.`;
+      } else {
+        txt.innerHTML = "<span style='color:red;'>Por favor, insira valores válidos para distância e tempo.</span>";
+      }
+    }
+  </script>
+</script>
