@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
           field: "text",
           direction: "asc"
         },
-        placeholder: "Digite para buscar uma prova..."
+        placeholder: "Selecione ou digite uma prova..."
       });
 
       // Atualiza os dados na primeira prova como padrão

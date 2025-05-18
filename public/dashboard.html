@@ -32,11 +32,9 @@
         </div>
       </div>
     </div>
-
   </header>
 
   <main class="container">
-
     <div class="banner-prova">
       <h2 id="proximo_desafio"></h2>
       <select id="selecao_prova">
@@ -72,19 +70,14 @@
       <div class="links-info">
         <h2>Preparo para a Prova</h2><br>
         <div id="info-planejamento" class="painel-planejamento" style="display: flex; gap: 20px;">
-          <div id="menu_links" style="min-width: 180px;">
-          </div>
+          <div id="menu_links" style="min-width: 180px;"></div>
           <div id="conteudo_info" style="flex-grow: 1; padding: 10px; border: 1px solid #ccc;">
             <h3>Selecione uma categoria abaixo</h3>
           </div>
         </div>
       </div>
-    </div>
 
-
-    <div class="calculadora-pace">
       <h2>Cálculos do Corredor</h2><br>
-
       <div style="display: flex; gap: 20px; flex-wrap: wrap;">
         <!-- Coluna do Pace -->
         <div style="flex: 1; min-width: 280px;">
@@ -113,19 +106,16 @@
           </div>
         </div>
 
-        <!-- Coluna da Zona 2 -->
+        <!-- Z2 -->
         <div style="flex: 1; min-width: 280px;">
           <h2 class="text-lg font-semibold mb-2">Frequência Cardíaca - Zona 2 (Z2)
             <span class="tooltip">ⓘ
               <span class="tooltip-text">
-                Frequência Cardíaca - Zona 2 (Z2)
-                Zona 2 é uma faixa de intensidade ideal para treinos aeróbicos leves, fundamentais para aumentar a
-                resistência e otimizar a queima de gordura.
-                Utilizamos a fórmula de Karvonen para estimar essa zona:
-                FCmáx = 220 - idade
-                FCreserva = FCmáx - FCrepouso
-                Por padrão, consideramos a frequência cardíaca de repouso (FCrepouso) como 60 bpm.
+                Zona 2 é uma faixa de intensidade ideal para treinos aeróbicos leves.
+                Utilizamos a fórmula de Karvonen para estimar:
                 <br>
+                FCmáx = 220 - idade<br>
+                FCreserva = FCmáx - FCrepouso (consideramos 60 bpm)<br>
                 Zona 2 = 60% a 70% da FCreserva + FCrepouso
               </span>
             </span>
@@ -141,22 +131,36 @@
             <p>Zona 2: <span id="z2"></span></p>
           </div>
         </div>
+      </div>
+    </div>
 
+    <!-- Seção Separada: Recuperação Pós Prova -->
+    <div class="links-info" style="margin-top: 40px;">
+      <h2>Recuperação Pós Prova</h2>
+      <ul>
+        <li><a href="#">Equipamentos Obrigatórios</a></li>
+        <li><a href="#">Nutrição/Hidratação</a></li>
+        <li><a href="#">Clima Previsto</a></li>
+        <li><a href="#">Regulamento</a></li>
+      </ul>
 
-
+      <!-- Botão Strava Importar -->
+      <div style="margin-top: 20px;">
+        <button onclick="importarStrava()"
+          style="display: flex; align-items: center; gap: 8px; background-color: #fc4c02; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;">
+          <img
+            src="./img/icon_strava.png"
+            alt="Strava" style="width: 20px; height: 20px;">
+          Importar Resultado do Strava
+        </button>
       </div>
 
-      <div class="links-info">
-        <h2>Recuperação Pós Prova</h2>
-        <ul>
-          <li><a href="#">Equipamentos Obrigatórios</a></li>
-          <li><a href="#">Nutrição/Hidratação</a></li>
-          <li><a href="#">Clima Previsto</a></li>
-          <li><a href="#">Regulamento</a></li>
-        </ul>
+      <!-- Botão de Análise do BOB .. aguardar Matheus -->
+      <button id="botaoBOBia" style="margin-top: 10px;">Análise IA</button>
 
-        <button id="botaoBOBia">Análise iA</button>
-        <div id="resumo" style="margin-top: 10px; background: #eee; padding: 10px; border-radius: 4px;"></div>
+      <!-- Resultado da IA -->
+      <div id="resumo" style="margin-top: 10px; background: #eee; padding: 10px; border-radius: 4px;"></div>
+    </div>
 
 
   </main>
