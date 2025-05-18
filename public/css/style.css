@@ -204,8 +204,8 @@ header .wrapper {
 
 .imagem-processo {
     width: 100%;
-    max-width: 250px;
-    height: 180px;
+    max-width: 500px;
+    height: 280px;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 10px;
