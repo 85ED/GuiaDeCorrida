@@ -61,6 +61,11 @@
       </div>
     </div>
 
+    <div style="margin-top: 30px;">
+      <button id="botao_inserir_prova" onclick="inserirProva()">Gravar Prova</button>
+      <div id="msg-inserir" style="margin-top: 10px; color: green;"></div>
+    </div>
+
     <div class="grafico-container">
       <canvas id="graficoAltimetria"></canvas>
     </div>
@@ -132,6 +137,14 @@
           </div>
         </div>
       </div>
+
+      <div id="provas-futuras">
+        <h3>Provas Futuras</h3>
+        <ul id="lista-provas">
+          <!-- provas carregadas aqui -->
+        </ul>
+      </div>
+
     </div>
 
     <!-- Seção Separada: Recuperação Pós Prova -->
@@ -148,9 +161,7 @@
       <div style="margin-top: 20px;">
         <button onclick="importarStrava()"
           style="display: flex; align-items: center; gap: 8px; background-color: #fc4c02; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;">
-          <img
-            src="./img/icon_strava.png"
-            alt="Strava" style="width: 20px; height: 20px;">
+          <img src="./img/icon_strava.png" alt="Strava" style="width: 20px; height: 20px;">
           Importar Resultado do Strava
         </button>
       </div>
@@ -159,7 +170,7 @@
       <button id="botaoBOBia" style="margin-top: 10px;">Análise IA</button>
 
       <!-- Resultado da IA -->
-      <div id="resumo" style="margin-top: 10px; background: #eee; padding: 10px; border-radius: 4px;"></div>
+      <div id="bob_style" style="margin-top: 10px; background: #eee; padding: 10px; border-radius: 4px;"></div>
     </div>
 
 

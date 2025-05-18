@@ -16,10 +16,6 @@ CREATE TABLE usuario (
 
 ALTER TABLE usuario MODIFY COLUMN senha VARCHAR(64) NOT NULL COMMENT 'SHA-256 hashed';
 
-SELECT * FROM usuario;
-
-
-
 CREATE TABLE preparo (
   idpreparo INT PRIMARY KEY AUTO_INCREMENT,
   idusuario INT,
@@ -48,3 +44,4 @@ CREATE TABLE prova (
   CONSTRAINT fk_prova_preparo FOREIGN KEY (idpreparo) REFERENCES preparo(idpreparo)
 );
 
+SELECT * FROM prova;
