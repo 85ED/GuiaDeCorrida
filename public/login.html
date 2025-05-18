@@ -79,6 +79,9 @@
 
       <button onclick="fazerLogin()" class="botao">ENTRAR</button>
       <button onclick="mostrarCadastro()" class="botao botao-jatenho-conta">VOLTAR AO CADASTRO</button>
+
+      <div id="mensagem_login" style="color: green; margin-top: 10px;"></div>
+
     </div>
   </div>
 
@@ -131,32 +134,43 @@
     }
 
     async function fazerLogin() {
-      const dados = {
-        email: document.getElementById("loginEmail").value.trim(),
-        senha: document.getElementById("loginSenha").value
-      };
+  const dados = {
+    email: document.getElementById("loginEmail").value.trim(),
+    senha: document.getElementById("loginSenha").value
+  };
 
-      try {
-        const response = await fetch('http://localhost:3000/usuarios/autenticar', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(dados)
-        });
+  try {
+    const response = await fetch('http://localhost:3000/usuarios/autenticar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dados)
+    });
 
-        const resultado = await response.json();
+    const resultado = await response.json();
 
-        if (resultado.success && resultado.usuario) {
-          sessionStorage.NOME_USUARIO = resultado.usuario.nome;
-          sessionStorage.EMAIL_USUARIO = resultado.usuario.email;
-          sessionStorage.ID_USUARIO = resultado.usuario.idUsuario;
-          window.location.href = "dashboard.html";
-        } else {
-          throw resultado;
-        }
-      } catch (error) {
-        alert(error.error || 'Falha no login');
+    if (resultado.success && resultado.usuario) {
+      sessionStorage.NOME_USUARIO = resultado.usuario.nome;
+      sessionStorage.EMAIL_USUARIO = resultado.usuario.email;
+      sessionStorage.ID_USUARIO = resultado.usuario.idUsuario;
+
+      // Exibe uma mensagem de sucesso ao usuário
+      const mensagem = document.getElementById("mensagem_login");
+      if (mensagem) {
+        mensagem.textContent = "Login bem-sucedido! Redirecionando para o dashboard...";
       }
+
+      // Aguarda 2 segundos antes de redirecionar
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 2000);
+    } else {
+      throw resultado;
     }
+  } catch (error) {
+    alert(error.error || 'Falha no login');
+  }
+}
+
 
   </script>
 
