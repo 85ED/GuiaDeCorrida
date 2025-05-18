@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GuiaDeCorrida</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="./img/logo_black.png" type="GC">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 </head>
@@ -31,39 +32,39 @@
 
   <section class="contact-section">
     <div class="left-image">
-        <img src="./img/3.jpg" alt="Imagem de contato">
+      <img src="./img/3.jpg" alt="Imagem de contato">
     </div>
     <div class="right-form">
-        <div class="form-wrapper">
-            <h2>Entre em Contato</h2>
-            
-            <form action="#" method="POST" onsubmit="return verificarFormulario(event)">
-                <div class="form-group">
-                    <label for="nome">Nome Completo</label>
-                    <input type="text" id="nome" name="nome" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="assunto">Assunto</label>
-                    <select id="assunto" name="assunto" required>
-                        <option value="">Selecione um assunto</option>
-                        <option value="duvida">Dúvida</option>
-                        <option value="sugestao">Sugestão</option>
-                        <option value="reclamacao">Reclamação</option>
-                        <option value="elogio">Elogio</option>
-                        <option value="outro">Outro</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="mensagem">Mensagem</label>
-                    <textarea id="mensagem" name="mensagem" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Enviar Mensagem</button>
-            </form>
-        </div>
+      <div class="form-wrapper">
+        <h2>Entre em Contato</h2>
+
+        <form action="#" method="POST" onsubmit="return verificarFormulario(event)">
+          <div class="form-group">
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" name="nome" required>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="assunto">Assunto</label>
+            <select id="assunto" name="assunto" required>
+              <option value="">Selecione um assunto</option>
+              <option value="duvida">Dúvida</option>
+              <option value="sugestao">Sugestão</option>
+              <option value="reclamacao">Reclamação</option>
+              <option value="elogio">Elogio</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Enviar Mensagem</button>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -71,24 +72,23 @@
     <h2 style="color: white; font-size: 15px;">Projeto Desenvolvido por Edson Felix – SPTECH</h2>
     <h2 style="color: white; font-size: 15px;">Fale Conosco: edson.marques@sptech.school </h2>
     <div class="redes">
-        <a href="https://www.linkedin.com/in/code85ed/" class="social-link" target="_blank"
-            rel="noopener noreferrer">
-            <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="https://github.com/85ED" class="social-link" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-git"></i>
-        </a>
+      <a href="https://www.linkedin.com/in/code85ed/" class="social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://github.com/85ED" class="social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-git"></i>
+      </a>
     </div>
     <p style="font-size: 12px; color: #ccc; margin-top: 10px;">
-        Algumas imagens neste site são licenciadas de <a href="https://www.istockphoto.com/" target="_blank"
-            rel="noopener noreferrer" style="color: #ccc;">iStock</a>.
+      Algumas imagens neste site são licenciadas de <a href="https://www.istockphoto.com/" target="_blank"
+        rel="noopener noreferrer" style="color: #ccc;">iStock</a>.
     </p>
   </footer>
 
   <script>
     function verificarFormulario(event) {
       event.preventDefault(); // Impede o envio padrão do formulário
-      
+
       var nome = document.getElementById('nome').value;
       var email = document.getElementById('email').value;
       var mensagem = document.getElementById('mensagem').value;
@@ -99,12 +99,12 @@
         return false;
       } else {
         alert("Mensagem enviada com sucesso! Em breve entraremos em contato.");
-        
+
         document.getElementById('nome').value = "";
         document.getElementById('email').value = "";
         document.getElementById('mensagem').value = "";
         document.getElementById('assunto').value = "";
-        
+
         return true;
 
         // ver depois o site https://formsubmit.co/ e tentar substituir action="#" por um script 
@@ -112,4 +112,5 @@
     }
   </script>
 </body>
+
 </html>
