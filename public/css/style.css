@@ -12,6 +12,7 @@ html {
 body {
     background-color: #f7f7f7;
     text-align: center;
+    font-family: 'Montserrat', sans-serif;
 }
 
 header {
@@ -47,6 +48,11 @@ header .wrapper {
 
 #menu li a:not(.botao-login):hover {
     color: #ff7f00;
+}
+
+#menu li a.ativo {
+  color: #f39c12; 
+  font-weight: bold;
 }
 
 #menu li a.botao-login {

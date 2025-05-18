@@ -18,6 +18,8 @@ ALTER TABLE usuario MODIFY COLUMN senha VARCHAR(64) NOT NULL COMMENT 'SHA-256 ha
 
 SELECT * FROM usuario;
 
+
+
 CREATE TABLE preparo (
   idpreparo INT PRIMARY KEY AUTO_INCREMENT,
   idusuario INT,
