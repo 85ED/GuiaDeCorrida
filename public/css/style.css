@@ -575,3 +575,50 @@ footer a:hover {
 .hidden {
   display: none;
 }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    color: 000080;
+    cursor: help;
+    font-size: 12px;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 180px;
+    background-color: #000080;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 125%; 
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 11px;
+    line-height: 1.2;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.velocidade {
+    background-color: #ff7f00;
+    color: white !important;
+    border-radius: 5px;
+    font-size: 1.2em;
+    padding: 12px 20px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.velocidade:hover {
+    background-color: #e67000;
+}
