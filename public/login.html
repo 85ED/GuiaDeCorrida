@@ -134,42 +134,47 @@
     }
 
     async function fazerLogin() {
-  const dados = {
-    email: document.getElementById("loginEmail").value.trim(),
-    senha: document.getElementById("loginSenha").value
-  };
+      const dados = {
+        email: document.getElementById("loginEmail").value.trim(),
+        senha: document.getElementById("loginSenha").value
+      };
 
-  try {
-    const response = await fetch('http://localhost:3000/usuarios/autenticar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dados)
-    });
+      try {
+        const response = await fetch('http://localhost:3000/usuarios/autenticar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dados)
+        });
 
-    const resultado = await response.json();
+        const resultado = await response.json();
 
-    if (resultado.success && resultado.usuario) {
-      sessionStorage.NOME_USUARIO = resultado.usuario.nome;
-      sessionStorage.EMAIL_USUARIO = resultado.usuario.email;
-      sessionStorage.ID_USUARIO = resultado.usuario.idUsuario;
+        if (resultado.success && resultado.usuario) {
+          sessionStorage.NOME_USUARIO = resultado.usuario.nome;
+          sessionStorage.EMAIL_USUARIO = resultado.usuario.email;
+          sessionStorage.ID_USUARIO = resultado.usuario.idUsuario;
 
-      // Exibe uma mensagem de sucesso ao usuário
-      const mensagem = document.getElementById("mensagem_login");
-      if (mensagem) {
-        mensagem.textContent = "Login bem-sucedido! Redirecionando para o dashboard...";
+          // Exibe uma mensagem de carregamento
+          const conteudoInfo = document.getElementById("conteudo_info");
+          if (conteudoInfo) {
+            conteudoInfo.innerHTML = "<p>Carregando dashboard...</p>";
+          }
+
+          const loadingOverlay = document.getElementById("loading");
+          if (loadingOverlay) {
+            loadingOverlay.classList.remove("hidden");
+          }
+
+          // Aguarda 2 segundos antes de redirecionar
+          setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 2000);
+        } else {
+          throw resultado;
+        }
+      } catch (error) {
+        alert(error.error || 'Falha no login');
       }
-
-      // Aguarda 2 segundos antes de redirecionar
-      setTimeout(() => {
-        window.location.href = "dashboard.html";
-      }, 2000);
-    } else {
-      throw resultado;
     }
-  } catch (error) {
-    alert(error.error || 'Falha no login');
-  }
-}
 
 
   </script>

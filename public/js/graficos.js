@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, 100);
 
-
   fetch("./data/provas.json")
     .then((res) => res.json())
     .then((provas) => {
@@ -67,26 +66,10 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch((erro) => {
       console.error("Erro ao carregar o JSON:", erro);
     });
+
+  // Executa cálculo da zona 2 ao carregar
+  calcular_zona2();
 });
-
-function atualizarProva(provas, id) {
-  const prova = provas[id];
-  const hoje = new Date();
-  const [dia, mes, ano] = prova.data.split("/").map(Number);
-  const dataProva = new Date(ano, mes - 1, dia);
-  const diferenca = Math.ceil((dataProva - hoje) / (1000 * 60 * 60 * 24));
-
-  document.getElementById("proximo_desafio").textContent =
-    `Prova: ${prova.nome} (${prova.data}, faltam ${diferenca} dias)`;
-
-  document.getElementById("distancia").textContent = `${prova.distancia} Km`;
-  document.getElementById("altimetria").textContent = prova.altimetria;
-  document.getElementById("temperatura").textContent = `${prova.temperatura}°C`;
-  document.getElementById("modalidade").textContent = prova.tipo;
-
-  desenharGraficoChartJS(prova.labels, prova.elevacao);
-}
-// coloca em cima uma chave
 
 function desenharGraficoChartJS(labels, dados) {
   const ctx = document.getElementById("graficoAltimetria").getContext("2d");
@@ -144,82 +127,83 @@ function desenharGraficoChartJS(labels, dados) {
   });
 }
 
-function calcularPace() {
-  const distancia = parseFloat(document.getElementById("ipt_distancia").value);
-  const tempo = parseFloat(document.getElementById("ipt_tempo").value);
+function atualizarProva(provas, id) {
+  const prova = provas[id];
+  const hoje = new Date();
+  const [dia, mes, ano] = prova.data.split("/").map(Number);
+  const dataProva = new Date(ano, mes - 1, dia);
+  const diferenca = Math.ceil((dataProva - hoje) / (1000 * 60 * 60 * 24));
 
-  if (!distancia || !tempo || distancia <= 0 || tempo <= 0) {
-    document.getElementById("txt").textContent = "Insira valores válidos.";
-    return;
+  document.getElementById("proximo_desafio").textContent =
+    `Prova: ${prova.nome} (${prova.data}, faltam ${diferenca} dias)`;
+
+  document.getElementById("distancia").textContent = `${prova.distancia} Km`;
+  document.getElementById("altimetria").textContent = prova.altimetria;
+  document.getElementById("temperatura").textContent = `${prova.temperatura}°C`;
+  document.getElementById("modalidade").textContent = prova.tipo;
+
+  desenharGraficoChartJS(prova.labels, prova.elevacao);
+
+  // Atualiza os botões
+  var menuLinks = document.getElementById("menu_links");
+  menuLinks.innerHTML = "";
+
+  var conteudoInfo = document.getElementById("conteudo_info");
+  conteudoInfo.innerHTML = "";
+
+  var botoes = [];
+
+  if (prova.tipo === "Asfalto") {
+    botoes = ["Altimetria", "Pace", "Recorde Mundial", "Histórico"];
+  } else if (prova.tipo === "Montanha") {
+    botoes = ["Altimetria", "Técnicas de Subida", "Equipamentos", "Tempo Limite"];
   }
 
-  const pace = tempo / distancia;
-  const minutos = Math.floor(pace);
-  const segundos = Math.round((pace - minutos) * 60);
+  botoes.forEach(function (botao) {
+    var a = document.createElement("a");
+    a.href = "#";
+    a.textContent = botao;
+    a.style.marginRight = "15px";
+    a.style.textDecoration = "none";
+    a.style.color = "#0a1f56";
+    a.style.fontWeight = "bold";
 
-  document.getElementById("txt").textContent =
-    `Pace: ${minutos}m ${segundos.toString().padStart(2, '0')}s por km.`;
-}
+    // Função ao clicar no botão
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
 
-// Atualiza os botões
-var menuLinks = document.getElementById("menu_links");
-menuLinks.innerHTML = "";
+      var texto = "";
 
-var conteudoInfo = document.getElementById("conteudo_info");
-conteudoInfo.innerHTML = "";
+      switch (botao) {
+        case "Altimetria":
+          texto = `A prova apresenta ${prova.altimetria} metros de altimetria acumulada.`;
+          break;
+        case "Pace":
+          texto = "Use a calculadora de pace para planejar seu ritmo ideal para a distância.";
+          break;
+        case "Recorde Mundial":
+          texto = "O recorde mundial de maratona masculina é 2h00m35s. Feminino é 2h11m53s.";
+          break;
+        case "Histórico":
+          texto = `A prova ${prova.nome} é uma das mais tradicionais no calendário mundial.`;
+          break;
+        case "Técnicas de Subida":
+          texto = "Em montanhas, use passos curtos e constantes para otimizar energia.";
+          break;
+        case "Equipamentos":
+          texto = "Para provas de montanha, use tênis com tração, mochila de hidratação e corta-vento.";
+          break;
+        case "Tempo Limite":
+          texto = "Provas de montanha geralmente exigem pace médio de até 12min/km com cortes em pontos.";
+          break;
+      }
 
-var botoes = [];
+      conteudoInfo.textContent = texto;
+    });
 
-if (prova.tipo === "Asfalto") {
-  botoes = ["Altimetria", "Pace", "Recorde Mundial", "Histórico"];
-} else if (prova.tipo === "Montanha") {
-  botoes = ["Altimetria", "Técnicas de Subida", "Equipamentos", "Tempo Limite"];
-}
-
-botoes.forEach(function (botao) {
-  var a = document.createElement("a");
-  a.href = "#";
-  a.textContent = botao;
-  a.style.marginRight = "15px";
-  a.style.textDecoration = "none";
-  a.style.color = "#0a1f56";
-  a.style.fontWeight = "bold";
-
-  // Função ao clicar no botão
-  a.addEventListener("click", function (e) {
-    e.preventDefault();
-
-    var texto = "";
-
-    switch (botao) {
-      case "Altimetria":
-        texto = `A prova apresenta ${prova.altimetria} metros de altimetria acumulada.`;
-        break;
-      case "Pace":
-        texto = "Use a calculadora de pace para planejar seu ritmo ideal para a distância.";
-        break;
-      case "Recorde Mundial":
-        texto = "O recorde mundial de maratona masculina é 2h00m35s. Feminino é 2h11m53s.";
-        break;
-      case "Histórico":
-        texto = `A prova ${prova.nome} é uma das mais tradicionais no calendário mundial.`;
-        break;
-      case "Técnicas de Subida":
-        texto = "Em montanhas, use passos curtos e constantes para otimizar energia.";
-        break;
-      case "Equipamentos":
-        texto = "Para provas de montanha, use tênis com tração, mochila de hidratação e corta-vento.";
-        break;
-      case "Tempo Limite":
-        texto = "Provas de montanha geralmente exigem pace médio de até 12min/km com cortes em pontos.";
-        break;
-    }
-
-    conteudoInfo.textContent = texto;
+    menuLinks.appendChild(a);
   });
-
-  menuLinks.appendChild(a);
-});
+}
 
 function calcularPace() {
   var distancia = parseFloat(document.getElementById('ipt_distancia').value);
@@ -250,10 +234,3 @@ function calcular_zona2() {
     document.getElementById('z2').innerText = `${z2_min} a ${z2_max} bpm`;
   }
 }
-
-// Executa cálculo padrão ao carregar
-window.onload = function () {
-  calcular_zona2();
-};
-
-
