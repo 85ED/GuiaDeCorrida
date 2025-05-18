@@ -16,26 +16,32 @@
 
 <body onload="validarSessao();">
   <header>
-    <div class="container cabecalho">
-      <img src="./img/logo_black.png" alt="Guia de Corrida" class="logo-site" />
-      <p id="saudacao_usuario" class="saudacao-central"></p>
-      <div class="usuario-info">
-        <div class="info-usuario">
-          <p>Usuário: <span id="b_usuario"></span></p>
-          <p>Login: <span id="b_email"></span></p>
-          <p id="localizacao"></p>
-          <button class="botao-sair" onclick="limparSessao()">Sair</button>
-        </div>
-      </div>
+<div class="container cabecalho">
+  <img src="./img/logo_black.png" alt="Guia de Corrida" class="logo-site" />
+
+  <div class="saudacao-busca">
+    <p id="saudacao_usuario" class="saudacao-central"></p>
+  </div>
+
+  <div class="usuario-info">
+    <div class="info-usuario">
+      <p>Usuário: <span id="b_usuario"></span></p>
+      <p>Login: <span id="b_email"></span></p>
+      <p id="localizacao"></p>
+      <button class="botao-sair" onclick="limparSessao()">Sair</button>
     </div>
+  </div>
+</div>
+
   </header>
 
   <main class="container">
+
     <div class="banner-prova">
       <h2 id="proximo_desafio"></h2>
-      <select id="selecao_prova" placeholder="Digite para buscar uma prova...">
-        <option value="" disabled selected>Selecione uma prova</option>
-      </select>
+          <select id="selecao_prova">
+      <option value="" disabled selected>Selecione ou digite para buscar uma prova...</option>
+    </select>
     </div>
 
     <div class="estatisticas">

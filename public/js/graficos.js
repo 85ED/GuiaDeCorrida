@@ -77,7 +77,7 @@ function atualizarProva(provas, id) {
   const diferenca = Math.ceil((dataProva - hoje) / (1000 * 60 * 60 * 24));
 
   document.getElementById("proximo_desafio").textContent =
-    `Desafio - ${prova.nome} (${prova.data} - Faltam ${diferenca} dias)`;
+    `Prova: ${prova.nome} (${prova.data}, faltam ${diferenca} dias)`;
 
   document.getElementById("distancia").textContent = `${prova.distancia} Km`;
   document.getElementById("altimetria").textContent = prova.altimetria;

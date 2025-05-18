@@ -15,7 +15,6 @@ body {
     padding: 0 20px;
 }
 
-/* Cabeçalho */
 header {
     background-color: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -27,6 +26,13 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
+}
+
+.saudacao-busca {
+  display: flex;
+  flex-direction: column; 
+  gap: 5px;
+  align-items: center;
 }
 
 .logo-site {
@@ -64,7 +70,6 @@ select:hover, button:hover {
     background-color: #152e69;
 }
 
-/* Banner da Prova */
 .banner-prova {
     background-color: white;
     padding: 20px;
@@ -191,4 +196,27 @@ select:hover, button:hover {
   color: #0a1f56;
   margin-top: 10px;
   font-weight: bold;
+}
+
+.ts-control {
+  background-color: white !important;
+  color: #0a1f56 !important;
+  border-radius: 4px !important;
+  border: 1px solid #0a1f56 !important;
+  padding: 8px !important;
+  font-weight: 600 !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.ts-dropdown {
+  background-color: white !important;
+  color: #0a1f56 !important;
+  border-radius: 4px !important;
+  border: 1px solid #0a1f56 !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.ts-dropdown-content .active {
+  background-color: #0a1f56 !important;
+  color: white !important;
 }
