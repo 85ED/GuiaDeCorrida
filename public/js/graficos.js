@@ -258,3 +258,38 @@ document.getElementById('btnHistorico').addEventListener('click', async () => {
   const resumo = await buscarResumoWikipedia(nomeProva);
   document.getElementById('resumoHistorico').textContent = resumo;
 });
+
+function calcularPace() {
+  var distancia = parseFloat(document.getElementById('ipt_distancia').value);
+  var tempo = parseFloat(document.getElementById('ipt_tempo').value);
+  if (!isNaN(distancia) && distancia > 0 && !isNaN(tempo) && tempo > 0) {
+    var pace = tempo / distancia;
+    var minutos = Math.floor(pace);
+    var segundos = Math.round((pace - minutos) * 60);
+    if (segundos < 10) {
+      segundos = `0${segundos}`;
+    }
+    document.getElementById('txt').innerText = `Pace: ${minutos}:${segundos} min/km`;
+  } else {
+    document.getElementById('txt').innerText = `Preencha todos os campos corretamente.`;
+  }
+}
+
+function calcular_zona2() {
+  var idade = parseInt(document.getElementById('idade_input').value);
+  if (!isNaN(idade) && idade > 0) {
+    var fcmax = 220 - idade;
+    var fcrepouso = 60;
+    var fcr = fcmax - fcrepouso;
+    var z2_min = Math.round((fcr * 0.6) + fcrepouso);
+    var z2_max = Math.round((fcr * 0.7) + fcrepouso);
+
+    document.getElementById('fcmax').innerText = fcmax;
+    document.getElementById('z2').innerText = `${z2_min} a ${z2_max} bpm`;
+  }
+}
+
+// Executa cálculo padrão ao carregar
+window.onload = function () {
+  calcular_zona2();
+};

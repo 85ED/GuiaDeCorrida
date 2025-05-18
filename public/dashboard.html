@@ -67,66 +67,96 @@
       <canvas id="graficoAltimetria"></canvas>
     </div>
 
-<div class="calculadora-pace">
-  <h2>Planejamento e Execução</h2>
-  <div class="links-info">
-    <h2>Preparo para a Prova</h2><br>
-    <div id="info-planejamento" class="painel-planejamento" style="display: flex; gap: 20px;">
-      <!-- Menu lateral -->
-      <div id="menu_links" style="min-width: 180px;">
-        <!-- Seus botões vão aqui -->
-      </div>
-      
-      <!-- Conteúdo info (resultado) -->
-      <div id="conteudo_info" style="flex-grow: 1; padding: 10px; border: 1px solid #ccc;">
-        <h3>Selecione uma categoria abaixo</h3>
-        <!-- Texto do clique aparece aqui -->
-      </div>
-    </div>
-  </div>
-</div>
-
-
-      <div class="calculadora-pace">
-        <h2>Cálculos do Corredor</h2><br>
-        <h2>
-          Pace - Seu Ritmo Ideal
-          <span class="tooltip">ⓘ
-            <span class="tooltip-text">
-              Pace na corrida é o tempo que você leva para percorrer 1 quilômetro ou 1 milha.
-              É uma medida usada para controlar o ritmo da corrida.
-              <br><br>Por exemplo, um pace de 5:00/km significa que o corredor leva 5 minutos para completar 1 km.
-              <br><br><strong>Fórmula:</strong> Pace = Tempo total / Distância percorrida
-            </span>
-          </span>
-        </h2>
-        <div class="form-pace">
-          <div class="campo">
-            <label for="ipt_distancia">Distância (km):</label>
-            <input type="number" id="ipt_distancia" step="0.01" />
+    <div class="calculadora-pace">
+      <h2>Planejamento e Execução</h2>
+      <div class="links-info">
+        <h2>Preparo para a Prova</h2><br>
+        <div id="info-planejamento" class="painel-planejamento" style="display: flex; gap: 20px;">
+          <div id="menu_links" style="min-width: 180px;">
           </div>
-          <div class="campo">
-            <label for="ipt_tempo">Tempo (minutos):</label>
-            <input type="number" id="ipt_tempo" step="0.01" />
+          <div id="conteudo_info" style="flex-grow: 1; padding: 10px; border: 1px solid #ccc;">
+            <h3>Selecione uma categoria abaixo</h3>
           </div>
-          <button onclick="calcularPace()">Calcular Pace</button>
-          <div id="txt" class="resultado"></div>
         </div>
       </div>
-
     </div>
 
-    <div class="links-info">
-      <h2>Recuperação Pós Prova</h2>
-      <ul>
-        <li><a href="#">Equipamentos Obrigatórios</a></li>
-        <li><a href="#">Nutrição/Hidratação</a></li>
-        <li><a href="#">Clima Previsto</a></li>
-        <li><a href="#">Regulamento</a></li>
-      </ul>
 
-      <button id="botaoBOBia">Análise iA</button>
-      <div id="resumo" style="margin-top: 10px; background: #eee; padding: 10px; border-radius: 4px;"></div>
+    <div class="calculadora-pace">
+      <h2>Cálculos do Corredor</h2><br>
+
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <!-- Coluna do Pace -->
+        <div style="flex: 1; min-width: 280px;">
+          <h2>
+            Pace - Seu Ritmo Ideal
+            <span class="tooltip">ⓘ
+              <span class="tooltip-text">
+                Pace na corrida é o tempo que você leva para percorrer 1 quilômetro ou 1 milha.
+                É uma medida usada para controlar o ritmo da corrida.
+                <br><br>Por exemplo, um pace de 5:00/km significa que o corredor leva 5 minutos para completar 1 km.
+                <br><br><strong>Fórmula:</strong> Pace = Tempo total / Distância percorrida
+              </span>
+            </span>
+          </h2>
+          <div class="form-pace">
+            <div class="campo">
+              <label for="ipt_distancia">Distância (km):</label>
+              <input type="number" id="ipt_distancia" step="0.01" />
+            </div>
+            <div class="campo">
+              <label for="ipt_tempo">Tempo (minutos):</label>
+              <input type="number" id="ipt_tempo" step="0.01" />
+            </div>
+            <button onclick="calcularPace()">Calcular Pace</button>
+            <div id="txt" class="resultado"></div>
+          </div>
+        </div>
+
+        <!-- Coluna da Zona 2 -->
+        <div style="flex: 1; min-width: 280px;">
+          <h2 class="text-lg font-semibold mb-2">Frequência Cardíaca - Zona 2 (Z2)
+            <span class="tooltip">ⓘ
+              <span class="tooltip-text">
+                Frequência Cardíaca - Zona 2 (Z2)
+                Zona 2 é uma faixa de intensidade ideal para treinos aeróbicos leves, fundamentais para aumentar a
+                resistência e otimizar a queima de gordura.
+                Utilizamos a fórmula de Karvonen para estimar essa zona:
+                FCmáx = 220 - idade
+                FCreserva = FCmáx - FCrepouso
+                Por padrão, consideramos a frequência cardíaca de repouso (FCrepouso) como 60 bpm.
+                <br>
+                Zona 2 = 60% a 70% da FCreserva + FCrepouso
+              </span>
+            </span>
+          </h2>
+
+          <div class="form-pace">
+            <div class="campo">
+              <label for="idade_input">Idade:</label>
+              <input type="number" id="idade_input" value="" />
+            </div>
+            <button onclick="calcular_zona2()">Calcular Z2</button>
+            <p>FC Máxima (bpm): <span id="fcmax"></span></p>
+            <p>Zona 2: <span id="z2"></span></p>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <div class="links-info">
+        <h2>Recuperação Pós Prova</h2>
+        <ul>
+          <li><a href="#">Equipamentos Obrigatórios</a></li>
+          <li><a href="#">Nutrição/Hidratação</a></li>
+          <li><a href="#">Clima Previsto</a></li>
+          <li><a href="#">Regulamento</a></li>
+        </ul>
+
+        <button id="botaoBOBia">Análise iA</button>
+        <div id="resumo" style="margin-top: 10px; background: #eee; padding: 10px; border-radius: 4px;"></div>
 
 
   </main>
