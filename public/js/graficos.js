@@ -144,7 +144,6 @@ function atualizarProva(provas, id) {
 
   desenharGraficoChartJS(prova.labels, prova.elevacao);
 
-  // Atualiza os botões
   var menuLinks = document.getElementById("menu_links");
   menuLinks.innerHTML = "";
 
@@ -154,9 +153,9 @@ function atualizarProva(provas, id) {
   var botoes = [];
 
   if (prova.tipo === "Asfalto") {
-    botoes = ["Altimetria", "Pace", "Recorde Mundial", "Histórico"];
+    botoes = ["Altimetria", "Pace", "Recorde Mundial", "Treino"];
   } else if (prova.tipo === "Montanha") {
-    botoes = ["Altimetria", "Técnicas de Subida", "Equipamentos", "Tempo Limite"];
+    botoes = ["Altimetria", "Técnicas de Subida", "Equipamentos", "Treino"];
   }
 
   botoes.forEach(function (botao) {
@@ -168,24 +167,21 @@ function atualizarProva(provas, id) {
     a.style.color = "#0a1f56";
     a.style.fontWeight = "bold";
 
-    // Função ao clicar no botão
     a.addEventListener("click", function (e) {
       e.preventDefault();
 
       var texto = "";
+      var treinoRandomico = Math.random();
 
       switch (botao) {
         case "Altimetria":
           texto = `A prova apresenta ${prova.altimetria} metros de altimetria acumulada.`;
           break;
         case "Pace":
-          texto = "Use a calculadora de pace para planejar seu ritmo ideal para a distância.";
+          texto = "Use a calculadora de pace logo abaixo para planejar seu ritmo ideal para a distância.";
           break;
         case "Recorde Mundial":
           texto = "O recorde mundial de maratona masculina é 2h00m35s. Feminino é 2h11m53s.";
-          break;
-        case "Histórico":
-          texto = `A prova ${prova.nome} é uma das mais tradicionais no calendário mundial.`;
           break;
         case "Técnicas de Subida":
           texto = "Em montanhas, use passos curtos e constantes para otimizar energia.";
@@ -193,9 +189,27 @@ function atualizarProva(provas, id) {
         case "Equipamentos":
           texto = "Para provas de montanha, use tênis com tração, mochila de hidratação e corta-vento.";
           break;
-        case "Tempo Limite":
-          texto = "Provas de montanha geralmente exigem pace médio de até 12min/km com cortes em pontos.";
-          break;
+        case "Treino":
+          fetch("./data/treinos.json")
+            .then(function (res) {
+              return res.json();
+            })
+            .then(function (treinos) {
+              var treinosFiltrados = treinos.filter(function (t) {
+                return t.tipo === prova.tipo;
+              });
+
+              var indice = Math.floor(treinoRandomico * treinosFiltrados.length);
+              var treinoSelecionado = treinosFiltrados[indice];
+
+              conteudoInfo.textContent = treinoSelecionado
+                ? treinoSelecionado.treino
+                : "Nenhum treino disponível para esta modalidade.";
+            })
+            .catch(function () {
+              conteudoInfo.textContent = "Erro ao carregar os treinos.";
+            });
+          return; // Interrompe aqui porque o texto será carregado assincronamente
       }
 
       conteudoInfo.textContent = texto;
