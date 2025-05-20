@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: intervalado 6x800m em ritmo forte, com 2 minutos de trote entre as séries."
+  },
+  {
+    "id": 2,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: subida contínua por 4 km com 300m de ganho de elevação, seguida de descida técnica controlada."
+  },
+  {
+    "id": 3,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: 10 km contínuos em ritmo confortável (Z2), foco em respiração e cadência."
+  },
+  {
+    "id": 4,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: fartlek na trilha, alternando 3 minutos forte com 2 minutos leve por 50 minutos."
+  },
+  {
+    "id": 5,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: progressivo 5 km + 3 km + 2 km (cada trecho mais rápido que o anterior)."
+  },
+  {
+    "id": 6,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: circuito técnico com bastões, 12 km com 600m D+, alternando subidas íngremes e planos."
+  },
+  {
+    "id": 7,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: 3 tiros de 2 km em ritmo de prova, com 4 minutos de trote entre os tiros."
+  },
+  {
+    "id": 8,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: treino em trilha escorregadia com foco em pisada e equilíbrio por 8 km."
+  },
+  {
+    "id": 9,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: tempo run de 25 minutos em ritmo controlado (entre Z3 e Z4)."
+  },
+  {
+    "id": 10,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: subida técnica com bastões, 5x400m em trilha com 15% de inclinação."
+  },
+  {
+    "id": 11,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: regenerativo leve, 6 km em Z1 com foco em soltura e respiração."
+  },
+  {
+    "id": 12,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: treino noturno em trilha com lanterna, 10 km ritmo confortável."
+  },
+  {
+    "id": 13,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: pirâmide 400m-800m-1200m-800m-400m com recuperação de 90 segundos entre os tiros."
+  },
+  {
+    "id": 14,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: treino de downhill, descidas rápidas por 3 km com foco em controle corporal."
+  },
+  {
+    "id": 15,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: 12 km em Z2 com os últimos 2 km em ritmo de prova."
+  },
+  {
+    "id": 16,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: trilha técnica com obstáculos naturais, total de 15 km e 700m de ganho altimétrico."
+  },
+  {
+    "id": 17,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: 5 km aquecimento + 4x1 km forte + 3 km desaquecimento."
+  },
+  {
+    "id": 18,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: hiking com corrida leve, 10 km alternando caminhada em subida e corrida em plano."
+  },
+  {
+    "id": 19,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: 10 tiros de 400m em ritmo de VO2 máximo com 1 minuto de pausa."
+  },
+  {
+    "id": 20,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: circuito de montanha com bastões, 18 km acumulando 900m D+."
+  },
+  {
+    "id": 21,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: 16 km ritmo contínuo (Z3), simulando a primeira metade de uma meia-maratona."
+  },
+  {
+    "id": 22,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: power hike 3x2 km em subida íngreme, descendo trotando."
+  },
+  {
+    "id": 23,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: 3 km leve + 5 km ritmo moderado + 2 km leve (treino em blocos)."
+  },
+  {
+    "id": 24,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: simulado de prova curta, 10 km com 400m D+, foco no pacing."
+  },
+  {
+    "id": 25,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: 30 minutos de corrida com técnica de respiração 2:2 e 3:3 em alternância."
+  },
+  {
+    "id": 26,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: treino técnico de trilha com raízes, pedras e descidas acentuadas (12 km)."
+  },
+  {
+    "id": 27,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: 4 tiros de 5 minutos em ritmo de limiar anaeróbico com pausa de 2 minutos."
+  },
+  {
+    "id": 28,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: longão de montanha, 20 km com 1200m de elevação acumulada, foco em nutrição e pacing."
+  },
+  {
+    "id": 29,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: circuito urbano com variação de terreno (asfalto + paralelepípedo), 8 km."
+  },
+  {
+    "id": 30,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: subida longa de 6 km com inclinação constante, treino de força de pernas."
+  },
+  {
+    "id": 31,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: 20 minutos de técnica de corrida (drills) + 6 km em Z2."
+  },
+  {
+    "id": 32,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: circuito com cordas e travessias leves, ideal para treinar agilidade e foco."
+  },
+  {
+    "id": 33,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: intervalado 5x1000m ritmo de prova, pausa ativa de 2 minutos."
+  },
+  {
+    "id": 34,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: exploração de trilha nova, 15 km ritmo confortável, foco em navegação."
+  },
+  {
+    "id": 35,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: 3 km aquecimento + 10 km ritmo constante + 2 km desaquecimento."
+  },
+  {
+    "id": 36,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: treino misto com subidas e planos, 14 km alternando entre ritmo leve e forte."
+  },
+  {
+    "id": 37,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: 8 tiros de 500m com foco em postura e velocidade."
+  },
+  {
+    "id": 38,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: 10 km em terreno misto com travessias de riacho e pequenas escaladas."
+  },
+  {
+    "id": 39,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: treino contínuo longo de 18 km com progressão a cada 6 km."
+  },
+  {
+    "id": 40,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: técnica de subida com bastões + descidas controladas, 12 km."
+  },
+  {
+    "id": 41,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: simulado de prova de 10 km em ritmo objetivo."
+  },
+  {
+    "id": 42,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: 3x subidas de 1 km com 200m de ganho altimétrico, trotando na descida."
+  },
+  {
+    "id": 43,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: treino regenerativo de 5 km + 20 minutos de mobilidade."
+  },
+  {
+    "id": 44,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: 2h de trilha técnica com mochila, simulando situação de prova autossuficiente."
+  },
+  {
+    "id": 45,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: 6 km em Z2 com variação de cadência a cada 2 km."
+  },
+  {
+    "id": 46,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: subida progressiva com inclinação crescente a cada km (total 7 km)."
+  },
+  {
+    "id": 47,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: tiros curtos 10x200m ritmo muito forte com 30 segundos de pausa."
+  },
+  {
+    "id": 48,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: 3 km subida + 3 km descida repetido 2 vezes, foco em eficiência."
+  },
+  {
+    "id": 49,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: treino em ladeira urbana, 5x500m subindo forte e descendo leve."
+  },
+  {
+    "id": 50,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: corrida com mochila de hidratação em trilha com pouca sinalização, foco em navegação e resistência."
+  },
+  {
+    "id": 51,
+    "tipo": "Montanha",
+    "treino": "Treino de Hoje: subida constante de 10 km em ritmo moderado, descida trotando, total de 20 km."
+  },
+  {
+    "id": 52,
+    "tipo": "Asfalto",
+    "treino": "Treino de Hoje: corrida leve de 30 minutos com 6 acelerações curtas (strides) ao final."
+  }
+]
