@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal | Guia de Corrida</title>
+  <link rel="stylesheet" href="./css/dash_style.css" />
+  <script src="./js/sessao.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+
+<body onload="validarSessao();">
+  <header>
+    <div class="container cabecalho">
+      <img src="./img/logo_black.png" alt="Guia de Corrida" class="logo-site" />
+
+      <div class="saudacao-busca">
+        <p id="saudacao_usuario" class="saudacao-central"></p>
+      </div>
+
+      <div class="usuario-info">
+        <div class="info-usuario">
+          <p>Usuário: <span id="b_usuario"></span></p>
+          <p>Login: <span id="b_email"></span></p>
+          <p id="localizacao"></p>
+          <button class="botao-sair" onclick="limparSessao()">Sair</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="margin-top: 30px;">
+
+    <p>
+      Esta ferramenta foi criada para ajudar corredores de todos os níveis a planejar, executar e recuperar-se de suas provas de forma inteligente e eficiente. Nosso objetivo é oferecer conteúdo e recursos que facilitem sua jornada na corrida, transformando seus treinos e competições em experiências de sucesso.
+    </p>
+    <br>
+
+    <h2>O que você encontrará por aqui?</h2>
+<br>
+    <p>
+      Você terá acesso a um conjunto completo de informações e ferramentas
+      organizadas em três etapas essenciais para a sua preparação e desempenho:
+    </p>
+
+    <section style="margin-top: 30px;">
+      <h3>1. Preparação</h3>
+      <p>
+        A fase de preparação é fundamental para que você se planeje para uma prova e escolha ela conforme sua agenda. Você poderá filtrar os maiores desafios do mundo da corrida e analisar quais podem fazer parte de sua agenda futura, o grafico de autimentria versus distancia te ajudara na analise de dificuldades.
+      </p>
+    </section>
+
+    <section style="margin-top: 20px;">
+      <h3>2. Execução</h3>
+      <p>
+        Durante a execução, nosso foco é ajudar você a obter informações sobre a prova, organizar os treinos, levantar equipamentos necessários para o grande dia, obter métricas para o seu pace e até cálculo de zona adequada para você perder peso tudo isso com a ajuda de nossas calculadoras.
+      </p>
+    </section>
+
+    <section style="margin-top: 20px;">
+      <h3>3. Recuperação</h3>
+      <p>
+        Após a prova, a recuperação adequada é essencial para garantir saúde e melhorar seu desempenho nas próximas corridas.
+        Aqui você encontrará orientações sobre hidratação, alimentação, descanso e dicas para prevenir lesões, além de acesso a análises pós-prova e integração com ferramentas como o Strava.
+      </p>
+    </section>
+
+    <p style="margin-top: 40px; font-style: italic;">
+      Navegue pelo menu <strong>Guia de Provas</strong> para começar sua jornada e aproveite todos os recursos que preparamos para você!
+    </p>
+
+    <button style="float: right;" onclick="window.location.href='./dashboard.html'">GUIA DE CORRIDA</button>
+
+  </main>
+
+  <!-- Link para JS externo -->
+  <script src="./js/graficos.js"></script>
+
+</body>
+
+</html>

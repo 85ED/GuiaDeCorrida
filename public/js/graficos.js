@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
           field: "text",
           direction: "asc"
         },
-        placeholder: "Selecione ou digite um nome de prova..."
+        placeholder: "Digite ou selecione uma uma prova..."
       });
 
       // Atualiza os dados na primeira prova como padrão
@@ -209,7 +209,7 @@ function atualizarProva(provas, id) {
             .catch(function () {
               conteudoInfo.textContent = "Erro ao carregar os treinos.";
             });
-          return; // Interrompe aqui porque o texto será carregado assincronamente
+          return; 
       }
 
       conteudoInfo.textContent = texto;
