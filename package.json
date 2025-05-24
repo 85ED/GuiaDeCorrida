@@ -7,7 +7,10 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "mysql2": "^2.3.3"
+    "express": "^4.19.2",
+    "mysql2": "^2.3.3",
+    "dotenv": "^16.4.5",
+    "@google/genai": "^0.14.1"
   }
 }
+

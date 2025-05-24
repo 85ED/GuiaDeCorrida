@@ -153,9 +153,9 @@ function atualizarProva(provas, id) {
   var botoes = [];
 
   if (prova.tipo === "Asfalto") {
-    botoes = ["Altimetria", "Pace", "Recorde Mundial", "Treino"];
+    botoes = ["Sobre a Prova (IA)", "Pace", "Recorde Mundial", "Treino"];
   } else if (prova.tipo === "Montanha") {
-    botoes = ["Altimetria", "Técnicas de Subida", "Equipamentos", "Treino"];
+    botoes = ["Sobre a Prova (IA)", "Técnicas de Subida", "Equipamentos", "Treino"];
   }
 
   botoes.forEach(function (botao) {
@@ -174,9 +174,16 @@ function atualizarProva(provas, id) {
       var treinoRandomico = Math.random();
 
       switch (botao) {
-        case "Altimetria":
-          texto = `A prova apresenta ${prova.altimetria} metros de altimetria acumulada.`;
-          break;
+        case "Sobre a Prova (IA)":
+          conteudoInfo.textContent = "Consultando IA sobre a prova...";
+          gerarResposta(`Em um parágrafo fale sobre a prova ${prova.nome}`)
+            .then(function (respostaIA) {
+              conteudoInfo.textContent = respostaIA;
+            })
+            .catch(function () {
+              conteudoInfo.textContent = `A prova ${prova.nome} é uma das mais importantes no mundo da corrida.`;
+            });
+          return;
         case "Pace":
           texto = "Use a calculadora de pace logo abaixo para planejar seu ritmo ideal para a distância.";
           break;
@@ -209,7 +216,7 @@ function atualizarProva(provas, id) {
             .catch(function () {
               conteudoInfo.textContent = "Erro ao carregar os treinos.";
             });
-          return; 
+          return;
       }
 
       conteudoInfo.textContent = texto;
@@ -247,4 +254,18 @@ function calcular_zona2() {
     document.getElementById('fcmax').innerText = fcmax;
     document.getElementById('z2').innerText = `${z2_min} a ${z2_max} bpm`;
   }
+}
+
+// bobia.js
+async function gerarResposta(pergunta) {
+  const response = await fetch('/perguntar', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ pergunta })
+  });
+
+  const data = await response.json();
+  return data.resultado;
 }

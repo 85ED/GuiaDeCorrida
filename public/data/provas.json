@@ -235,17 +235,16 @@
     "elevacao": [0, 350, 800, 1200, 900, 500],
     "labels": ["0km", "8km", "16km", "24km", "32km", "42km"]
   },
-  "22": {
-    "nome": "Lavaredo Ultra Trail - Itália",
-    "data": "28/06/2025",
-    "diasRestantes": 135,
-    "distancia": 120,
-    "altimetria": 5800,
-    "temperatura": 12,
-    "tipo": "Montanha",
-    "elevacao": [0, 500, 1100, 1700, 1300, 800],
-    "labels": ["0km", "24km", "48km", "72km", "96km", "120km"]
-  },
+"22": {
+  "nome": "Lavaredo Ultra Trail - Itália",
+  "data": "27/06/2025",
+  "distancia": 120,
+  "altimetria": 5800,
+  "temperatura": 12,
+  "tipo": "Montanha",
+  "elevacao": [1210, 1483, 1798, 1385, 1762, 2308, 2456, 1532, 1705, 1985, 2058, 2417, 2243, 2051, 1254, 1221],
+  "labels": ["0km", "18.7km", "28km", "34km", "42.6km", "49.8km", "52.5km", "67.5km", "77.1km", "90.5km", "97.7km", "101.9km", "105.3km", "105.3km", "120.4km", "122.4km"]
+},
   "23": {
     "nome": "Ultra Pirineu - Espanha",
     "data": "28/09/2025",
