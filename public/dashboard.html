@@ -61,11 +61,6 @@
       </div>
     </div>
 
-    <div style="margin-top: 30px;">
-      <button id="botao_inserir_prova" onclick="inserirProva()">Gravar Prova</button>
-      <div id="msg-inserir" style="margin-top: 10px; color: green;"></div>
-    </div>
-
     <div class="grafico-container">
       <canvas id="graficoAltimetria"></canvas>
     </div>
@@ -79,7 +74,14 @@
       <div id="menu_links" style="min-width: 180px;"></div>
       <div id="conteudo_info" style="margin-top: 20px; padding: 20px; border: 1px solid #ccc; min-height: 150px; width: 100%; background-color: #f9f9f9; border-radius: 8px;"></div>
     </div>
+          <div style="margin-top: 30px;">
+      <button id="botao_inserir_prova" onclick="inserirProva()">Gravar Prova</button>
+      <div id="msg-inserir" style="margin-top: 10px; color: green;"></div>
+    </div>
   </div>
+
+
+
 <h2>Cálculos do Corredor</h2><br>
     <div style="display: flex; gap: 20px; flex-wrap: wrap;">
       <!-- Coluna do Pace -->
@@ -144,16 +146,18 @@
     </div>
 </div>
     </div>
-    <!-- Seção Separada: Recuperação Pós Prova -->
+    <!-- Seção Separada: Recuperação Pós Prova inclusao -->
     <div class="links-info" style="margin-top: 40px;">
-      <h2>Recuperação Pós Prova</h2>
-      <ul>
-        <li><a href="#">Equipamentos Obrigatórios</a></li>
-        <li><a href="#">Nutrição/Hidratação</a></li>
-        <li><a href="#">Clima Previsto</a></li>
-        <li><a href="#">Regulamento</a></li>
-      </ul>
 
+
+  <h2>Recuperação Pós Prova</h2>
+  <div class="links-info">
+    <h2>Informações Essenciais</h2><br>
+    <h3>Selecione uma categoria abaixo</h3><br>
+    <div id="info-planejamento" class="painel-planejamento" style="display: flex; gap: 20px;">
+      <div id="menu_recupera" style="min-width: 180px;"></div>
+      <div id="recupera_info" style="margin-top: 20px; padding: 20px; border: 1px solid #ccc; min-height: 150px; width: 100%; background-color: #f9f9f9; border-radius: 8px;"></div>
+    </div>
       <!-- Botão Strava Importar -->
       <div style="margin-top: 20px;">
         <button onclick="importarStrava()"
@@ -162,14 +166,7 @@
           Importar Resultado do Strava
         </button>
       </div>
-
-      <!-- Botão de Análise do BOB .. aguardar Matheus -->
-      <button id="botaoBOBia" style="margin-top: 10px;">Análise IA</button>
-
-      <!-- Resultado da IA -->
-      <div id="bob_style" style="margin-top: 10px; background: #eee; padding: 10px; border-radius: 4px;"></div>
-    </div>
-
+  </div>
 
   </main>
 

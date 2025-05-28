@@ -144,6 +144,8 @@ function atualizarProva(provas, id) {
 
   desenharGraficoChartJS(prova.labels, prova.elevacao);
 
+  // planejamento antes da prova e execucao
+
   var menuLinks = document.getElementById("menu_links");
   menuLinks.innerHTML = "";
 
@@ -163,8 +165,8 @@ function atualizarProva(provas, id) {
     a.href = "#";
     a.textContent = botao;
 
-    a.style.marginRight = "10px";     
-    a.style.marginBottom = "10px";  
+    a.style.marginRight = "10px";
+    a.style.marginBottom = "10px";
     a.style.marginRight = "10px";
     a.style.textDecoration = "none";
     a.style.color = "#0a1f56";
@@ -239,6 +241,105 @@ function atualizarProva(provas, id) {
 
     menuLinks.appendChild(a);
   });
+
+  // recuperacao depois da prova ou no dia a dia
+
+  var menuLink = document.getElementById("menu_recupera");
+  menuLink.innerHTML = "";
+
+  var conteudoInf = document.getElementById("recupera_info");
+  conteudoInf.innerHTML = "";
+
+  var opcoes = [];
+
+  if (prova.tipo === "Asfalto") {
+    opcoes = ["Análise de Desempenho (IA)", "Cuidados Pós Prova", "Descanso Ativo", "Entender Como Você Foi"];
+  } else if (prova.tipo === "Montanha") {
+    opcoes = ["Análise de Desempenho (IA)", "Relaxar o Corpo", "Descanso Ativo", "Aprender com a Experiência"];
+  }
+
+  opcoes.forEach(function (opcao) {
+    var a = document.createElement("a");
+    a.href = "#";
+    a.textContent = opcao;
+
+    a.style.marginRight = "10px";
+    a.style.marginBottom = "10px";
+    a.style.marginRight = "10px";
+    a.style.textDecoration = "none";
+    a.style.color = "#0a1f56";
+    a.style.border = "1px solid #0a1f56";
+    a.style.padding = "6px 12px";
+    a.style.borderRadius = "4px";
+    a.style.cursor = "pointer";
+
+    // hover .. esse mouseenter e mouseleave eh do proprio dom
+    a.addEventListener("mouseenter", function () {
+      a.style.backgroundColor = "#f0f0f0";
+    });
+
+    a.addEventListener("mouseleave", function () {
+      a.style.backgroundColor = "transparent";
+    });
+
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      var texto = "";
+      var treinoRandomico = Math.random();
+
+      switch (opcao) {
+        case "Sobre a Prova (IA)":
+          conteudoInf.textContent = "Consultando IA sobre a prova...";
+          gerarResposta(`Em um parágrafo fale sobre a prova ${prova.nome}`)
+            .then(function (respostaIA) {
+              conteudoInf.textContent = respostaIA;
+            })
+            .catch(function () {
+              conteudoInf.textContent = `A prova ${prova.nome} é uma das mais importantes no mundo da corrida.`;
+            });
+          return;
+        case "Cuidados Pós Prova":
+          texto = "Tudo o que você faz na primeira hora conta muito: Comer algo leve com proteína e carboidrato (como frango com batata - doce). Alongar suavemente as pernas e costas. Usar gelo nas articulações para aliviar o impacto. Depois da prova, o corpo precisa de pausa de qualidade: Dormir bem na noite seguinte à prova. Beber bastante água ou isotônico para se hidratar. Fazer uma caminhada leve no dia seguinte para ajudar a soltar a musculatura.";
+          break;
+        case "Relaxar o Corpo":
+          texto = "Depois de tanto sobe e desce, o corpo pede cuidado: Dormir bastante para recuperar a energia. Fazer exercícios leves como respiração ou alongamentos tranquilos. Comer bem, incluindo frutas, vegetais e alimentos que ajudem a combater o cansaço. A montanha exige muito — é hora de devolver:Beber líquidos com sais minerais (como água de coco ou isotônicos). Caminhar devagar no dia seguinte para ativar a circulação. Usar compressas frias em locais doloridos.";
+          break;
+        case "Entender Como Você Foi":
+          texto = "Refletir é tão importante quanto correr: Veja como foi seu ritmo, hidratação e estratégia ao longo da prova. Reflita sobre o que funcionou e o que pode ser melhorado (tênis, roupa, alimentação, clima, ansiedade). Anote tudo em um caderno de treinos ou diário de corrida: estudos mostram que o ato de escrever ajuda o cérebro a consolidar aprendizados e identificar padrões. Isso te ajuda a ajustar treinos futuros e fazer escolhas mais conscientes no próximo desafio.";
+          break;
+        case "Aprender com a Experiência":
+          texto = "Cada prova ensina algo: Pense nos trechos mais exigentes: onde cansou mais? Onde sentiu mais confiança? Avalie se o equipamento foi adequado para o terreno e clima..Escreva suas percepções em um caderno de corrida: a escrita reflexiva, comprovada por pesquisas em neurociência, ativa áreas do cérebro ligadas à memória e ao planejamento. Com isso, você evolui com propósito e se prepara melhor para a próxima trilha.";
+          break;
+        case "Descanso Ativo":
+          fetch("./data/treinos.json")
+            .then(function (res) {
+              return res.json();
+            })
+            .then(function (treinos) {
+              var treinosFiltrados = treinos.filter(function (t) {
+                return t.tipo === prova.tipo;
+              });
+
+              var indice = Math.floor(treinoRandomico * treinosFiltrados.length);
+              var treinoSelecionado = treinosFiltrados[indice];
+
+              conteudoInf.textContent = treinoSelecionado
+                ? treinoSelecionado.treino
+                : "Nenhum treino disponível para esta modalidade.";
+            })
+            .catch(function () {
+              conteudoInf.textContent = "Erro ao carregar os treinos.";
+            });
+          return;
+      }
+
+      conteudoInf.textContent = texto;
+    });
+
+    menuLink.appendChild(a);
+  });
+
 }
 
 function calcularPace() {
