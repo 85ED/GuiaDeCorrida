@@ -162,10 +162,25 @@ function atualizarProva(provas, id) {
     var a = document.createElement("a");
     a.href = "#";
     a.textContent = botao;
-    a.style.marginRight = "15px";
+
+    a.style.marginRight = "10px";     
+    a.style.marginBottom = "10px";  
+    a.style.marginRight = "10px";
     a.style.textDecoration = "none";
     a.style.color = "#0a1f56";
-    a.style.fontWeight = "bold";
+    a.style.border = "1px solid #0a1f56";
+    a.style.padding = "6px 12px";
+    a.style.borderRadius = "4px";
+    a.style.cursor = "pointer";
+
+    // hover .. esse mouseenter e mouseleave eh do proprio dom
+    a.addEventListener("mouseenter", function () {
+      a.style.backgroundColor = "#f0f0f0";
+    });
+
+    a.addEventListener("mouseleave", function () {
+      a.style.backgroundColor = "transparent";
+    });
 
     a.addEventListener("click", function (e) {
       e.preventDefault();
