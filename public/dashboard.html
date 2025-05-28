@@ -65,114 +65,136 @@
       <canvas id="graficoAltimetria"></canvas>
     </div>
 
-<div class="calculadora-pace">
-  <h2>Planejamento e Execução</h2>
-  <div class="links-info">
-    <h2>Preparo para a Prova</h2><br>
-    <h3>Selecione uma categoria abaixo</h3><br>
-    <div id="info-planejamento" class="painel-planejamento" style="display: flex; gap: 20px;">
-      <div id="menu_links" style="min-width: 180px;"></div>
-      <div id="conteudo_info" style="margin-top: 20px; padding: 20px; border: 1px solid #ccc; min-height: 150px; width: 100%; background-color: #f9f9f9; border-radius: 8px;"></div>
-    </div>
-          <div style="margin-top: 30px;">
-      <button id="botao_inserir_prova" onclick="inserirProva()">Gravar Prova</button>
-      <div id="msg-inserir" style="margin-top: 10px; color: green;"></div>
-    </div>
-  </div>
-
-
-
-<h2>Cálculos do Corredor</h2><br>
-    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-      <!-- Coluna do Pace -->
-      <div style="flex: 1; min-width: 280px;">
-        <h2>
-          Pace - Seu Ritmo Ideal
-          <span class="tooltip">ⓘ
-            <span class="tooltip-text">
-              Pace na corrida é o tempo que você leva para percorrer 1 quilômetro ou 1 milha.
-              É uma medida usada para controlar o ritmo da corrida.
-              <br><br>Por exemplo, um pace de 5:00/km significa que o corredor leva 5 minutos para completar 1 km.
-              <br><br><strong>Fórmula:</strong> Pace = Tempo total / Distância percorrida
-            </span>
-          </span>
-        </h2>
-        <div class="form-pace">
-          <div class="campo">
-            <label for="ipt_distancia">Distância (km):</label>
-            <input type="number" id="ipt_distancia" step="0.01" />
+    <div class="calculadora-pace">
+      <h2>Planejamento e Execução</h2>
+      <div class="links-info">
+        <h2>Preparo para a Prova</h2><br>
+        <h3>Selecione uma categoria abaixo</h3><br>
+        <div id="info-planejamento" class="painel-planejamento" style="display: flex; gap: 20px;">
+          <div id="menu_links" style="min-width: 180px;"></div>
+          <div id="conteudo_info"
+            style="margin-top: 20px; padding: 20px; border: 1px solid #ccc; min-height: 150px; width: 100%; background-color: #f9f9f9; border-radius: 8px;">
           </div>
-          <div class="campo">
-            <label for="ipt_tempo">Tempo (minutos):</label>
-            <input type="number" id="ipt_tempo" step="0.01" />
-          </div>
-          <button onclick="calcularPace()">Calcular Pace</button>
-          <div id="txt" class="resultado"></div>
         </div>
-      </div>
-
-      <!-- Z2 -->
-      <div style="flex: 1; min-width: 280px;">
-        <h2 class="text-lg font-semibold mb-2">Frequência Cardíaca - Zona 2 (Z2)
-          <span class="tooltip">ⓘ
-            <span class="tooltip-text">
-              Zona 2 é uma faixa de intensidade ideal para treinos aeróbicos leves.
-              Utilizamos a fórmula de Karvonen para estimar:
-              <br>
-              FCmáx = 220 - idade<br>
-              FCreserva = FCmáx - FCrepouso (consideramos 60 bpm)<br>
-              Zona 2 = 60% a 70% da FCreserva + FCrepouso
-            </span>
-          </span>
-        </h2>
-
-        <div class="form-pace">
-          <div class="campo">
-            <label for="idade_input">Idade:</label>
-            <input type="number" id="idade_input" value="" />
-          </div>
-          <button onclick="calcular_zona2()">Calcular Z2</button>
-          <p>FC Máxima (bpm): <span id="fcmax"></span></p>
-          <p>Zona 2: <span id="z2"></span></p>
+        <div style="margin-top: 30px;">
+          <button id="botao_inserir_prova" onclick="inserirProva()">Planejar Prova</button>
+          <div id="msg-inserir" style="margin-top: 10px; color: green;"></div>
         </div>
-      </div>
-    </div>
-
         <div id="provas-futuras">
-      <h3>Provas Futuras</h3>
-      <ul id="lista-provas">
-        <!-- provas carregadas aqui -->
-      </ul>
+          <h3>Provas Futuras</h3>
+          <div id="provas_gravadas"></div>
+          <!-- provas carregadas aqui -->
+          </ul>
+        </div>
+      </div>
+
+      <h2>Cálculos do Corredor</h2><br>
+      <div style="display: flex; gap: 20px; flex-wrap: wrap; ">
+        <div style="flex: 1; min-width: 280px;">
+          <h2>
+            Pace - Seu Ritmo Ideal
+            <span class="tooltip">ⓘ
+              <span class="tooltip-text">
+                Pace na corrida é o tempo que você leva para percorrer 1 quilômetro ou 1 milha.
+                É uma medida usada para controlar o ritmo da corrida.
+                <br><br>Por exemplo, um pace de 5:00/km significa que o corredor leva 5 minutos para completar 1 km.
+                <br><br><strong>Fórmula:</strong> Pace = Tempo total / Distância percorrida
+              </span>
+            </span>
+          </h2>
+          <div class="form-pace">
+            <div class="campo">
+              <label for="ipt_distancia">Distância (km):</label>
+              <input type="number" id="ipt_distancia" step="0.01" />
+            </div>
+            <div class="campo">
+              <label for="ipt_tempo">Tempo (minutos):</label>
+              <input type="number" id="ipt_tempo" step="0.01" />
+            </div>
+            <button onclick="calcularPace()">Calcular Pace</button>
+            <div id="txt" class="resultado"></div>
+          </div>
+        </div>
+
+        <!-- Z2 karvonen -->
+        <div style="flex: 1; min-width: 280px;">
+          <h2 class="text-lg font-semibold mb-2">Frequência Cardíaca - Zona 2 (Z2)
+            <span class="tooltip">ⓘ
+              <span class="tooltip-text">
+                Zona 2 é uma faixa de intensidade ideal para treinos aeróbicos leves.
+                Utilizamos a fórmula de Karvonen para estimar:
+                <br>
+                FCmáx = 220 - idade<br>
+                FCreserva = FCmáx - FCrepouso (consideramos 60 bpm)<br>
+                Zona 2 = 60% a 70% da FCreserva + FCrepouso
+              </span>
+            </span>
+          </h2>
+
+          <div class="form-pace">
+            <div class="campo">
+              <label for="idade_input">Idade:</label>
+              <input type="number" id="idade_input" value="" />
+            </div>
+            <button onclick="calcular_zona2()">Calcular Z2</button>
+            <p>FC Máxima (bpm): <span id="fcmax"></span></p>
+            <p>Zona 2: <span id="z2"></span></p>
+          </div>
+        </div>
+      </div>
+
     </div>
-</div>
     </div>
     <!-- Seção Separada: Recuperação Pós Prova inclusao -->
     <div class="links-info" style="margin-top: 40px;">
 
 
-  <h2>Recuperação Pós Prova</h2>
-  <div class="links-info">
-    <h2>Informações Essenciais</h2><br>
-    <h3>Selecione uma categoria abaixo</h3><br>
-    <div id="info-planejamento" class="painel-planejamento" style="display: flex; gap: 20px;">
-      <div id="menu_recupera" style="min-width: 180px;"></div>
-      <div id="recupera_info" style="margin-top: 20px; padding: 20px; border: 1px solid #ccc; min-height: 150px; width: 100%; background-color: #f9f9f9; border-radius: 8px;"></div>
-    </div>
-      <!-- Botão Strava Importar -->
-      <div style="margin-top: 20px;">
-        <button onclick="importarStrava()"
-          style="display: flex; align-items: center; gap: 8px; background-color: #fc4c02; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;">
-          <img src="./img/icon_strava.png" alt="Strava" style="width: 20px; height: 20px;">
-          Importar Resultado do Strava
-        </button>
+      <h2>Recuperação Pós Prova</h2>
+      <div class="links-info">
+        <h2>Informações Essenciais</h2><br>
+        <h3>Selecione uma categoria abaixo</h3><br>
+        <div id="info-planejamento" class="painel-planejamento" style="display: flex; gap: 20px;">
+          <div id="menu_recupera" style="min-width: 180px;"></div>
+          <div id="recupera_info"
+            style="margin-top: 20px; padding: 20px; border: 1px solid #ccc; min-height: 150px; width: 100%; background-color: #f9f9f9; border-radius: 8px;">
+          </div>
+        </div>
+        <!-- Botão Strava Importar -->
+        <div style="margin-top: 20px;">
+          <button onclick="importarStrava()"
+            style="display: flex; align-items: center; gap: 8px; background-color: #fc4c02; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;">
+            <img src="./img/icon_strava.png" alt="Strava" style="width: 20px; height: 20px;">
+            Importar Resultado do Strava
+          </button>
+        </div>
       </div>
-  </div>
 
   </main>
 
-  <!-- Link para JS externo -->
-  <script src="./js/graficos.js"></script>
+  <footer style="text-align: center;">
+    <h2 style="color: #0a1f56; font-size: 15px;">Projeto Desenvolvido por Edson Felix – SPTECH</h2>
+    <h2 style="color: #0a1f56; font-size: 15px;">Fale Conosco: edson.marques@sptech.school </h2>
+    <a href="https://github.com/85ED/GuiaDeCorrida/blob/main/Documenta%C3%A7%C3%A3o/Pol%C3%ADtica%20de%20Privacidade.pdf"
+      class="politica" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>
+    <br><br>
+    <div class="redes">
+      <a href="https://www.linkedin.com/in/code85ed/" class="social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://github.com/85ED" class="social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-git"></i>
+      </a>
+    </div>
+  </footer>
 
-</body>
+  <body onload="validarSessao(); listarProvasFuturas();">
+
+    <!-- Link para JS externo -->
+    <script src="./js/graficos.js"></script>
+    <script>
+      window.onload = carregarProvasGravadas;
+    </script>
+
+  </body>
 
 </html>

@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         selectProva.appendChild(option);
       });
 
+      // campo de pesquisa das provas
       new TomSelect("#selecao_prova", {
         create: false,
         sortField: {
@@ -127,6 +128,8 @@ function desenharGraficoChartJS(labels, dados) {
   });
 }
 
+var ultimaProvaExibida = null;
+
 function atualizarProva(provas, id) {
   const prova = provas[id];
   const hoje = new Date();
@@ -141,6 +144,8 @@ function atualizarProva(provas, id) {
   document.getElementById("altimetria").textContent = prova.altimetria;
   document.getElementById("temperatura").textContent = `${prova.temperatura}°C`;
   document.getElementById("modalidade").textContent = prova.tipo;
+
+  ultimaProvaExibida = prova;
 
   desenharGraficoChartJS(prova.labels, prova.elevacao);
 
@@ -385,3 +390,38 @@ async function gerarResposta(pergunta) {
   const data = await response.json();
   return data.resultado;
 }
+
+// inserir prova
+
+function inserirProva() {
+  if (!ultimaProvaExibida) {
+    alert("Nenhuma prova selecionada.");
+    return;
+  }
+
+  var prova = ultimaProvaExibida;
+
+  // Formata a data no formato YYYY-MM-DD
+  var [dia, mes, ano] = prova.data.split("/");
+  var dataFormatada = `${ano}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`;
+
+  // Cria uma nova div com as informações da prova
+  var novaDiv = document.createElement("div");
+  novaDiv.textContent = `${prova.nome} - ${prova.distancia} km - ${prova.tipo} - ${dataFormatada}`;
+  document.getElementById("provas_gravadas").appendChild(novaDiv);
+
+  // Salva localmente (opcional)
+  var provasSalvas = JSON.parse(localStorage.getItem("provasGravadas")) || [];
+  provasSalvas.push({
+    nome: prova.nome,
+    distancia: prova.distancia,
+    tipo: prova.tipo,
+    data: dataFormatada,
+    altimetria: prova.altimetria
+  });
+  localStorage.setItem("provasGravadas", JSON.stringify(provasSalvas));
+
+  alert("Prova gravada com sucesso!");
+}
+
+
