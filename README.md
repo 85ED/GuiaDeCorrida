@@ -28,4 +28,4 @@ A documentação completa do projeto pode ser acessada no link abaixo:
    ```bash
    git clone https://github.com/85ED/GuiaDeCorrida.git
 
-## Este projeto contribui para o Objetivo de Desenvolvimento Sustentável 3 (ODS 3) – Saúde e Bem-Estar, promovendo a prática de corrida como meio de melhorar a saúde física e mental.
+*Este projeto contribui para o [Objetivo de Desenvolvimento Sustentável 3 – Saúde e Bem-Estar](https://brasil.un.org/pt-br/sdgs/3), promovendo a saúde por meio da prática orientada da corrida.*
