@@ -197,8 +197,8 @@ function atualizarProva(provas, id) {
 
       switch (botao) {
         case "Sobre a Prova (IA)":
-          conteudoInfo.textContent = "Consultando IA sobre a prova...";
-          gerarResposta(`Em um parágrafo fale sobre a prova ${prova.nome}`)
+          var nomeUsuario = document.getElementById("b_usuario")?.innerText || "o corredor";
+          gerarResposta(`Em um parágrafo, fale para ${nomeUsuario} sobre a prova ${prova.nome}.`)
             .then(function (respostaIA) {
               conteudoInfo.textContent = respostaIA;
             })
@@ -258,9 +258,9 @@ function atualizarProva(provas, id) {
   var opcoes = [];
 
   if (prova.tipo === "Asfalto") {
-    opcoes = ["Análise de Desempenho (IA)", "Cuidados Pós Prova", "Descanso Ativo", "Entender Como Você Foi"];
+    opcoes = ["Recuperação pós Prova (IA)", "Cuidados Essenciais", "Descanso Ativo", "Entender Como Você Foi"];
   } else if (prova.tipo === "Montanha") {
-    opcoes = ["Análise de Desempenho (IA)", "Relaxar o Corpo", "Descanso Ativo", "Aprender com a Experiência"];
+    opcoes = ["Recuperação pós Prova (IA)", "Relaxar o Corpo", "Descanso Ativo", "Aprender com a Experiência"];
   }
 
   opcoes.forEach(function (opcao) {
@@ -294,9 +294,10 @@ function atualizarProva(provas, id) {
       var treinoRandomico = Math.random();
 
       switch (opcao) {
-        case "Sobre a Prova (IA)":
-          conteudoInf.textContent = "Consultando IA sobre a prova...";
-          gerarResposta(`Em um parágrafo fale sobre a prova ${prova.nome}`)
+        case "Recuperação pós Prova (IA)":
+          conteudoInf.textContent = "Consultando IA sobre uma recuperação adequada...";
+          var nomeUsuario = document.getElementById("b_usuario")?.innerText || "o corredor";
+          gerarResposta(`Em um parágrafo, diga para ${nomeUsuario} como se recuperar da prova ${prova.nome}.`)
             .then(function (respostaIA) {
               conteudoInf.textContent = respostaIA;
             })
@@ -304,7 +305,7 @@ function atualizarProva(provas, id) {
               conteudoInf.textContent = `A prova ${prova.nome} é uma das mais importantes no mundo da corrida.`;
             });
           return;
-        case "Cuidados Pós Prova":
+        case "Cuidados Essenciais":
           texto = "Tudo o que você faz na primeira hora conta muito: Comer algo leve com proteína e carboidrato (como frango com batata - doce). Alongar suavemente as pernas e costas. Usar gelo nas articulações para aliviar o impacto. Depois da prova, o corpo precisa de pausa de qualidade: Dormir bem na noite seguinte à prova. Beber bastante água ou isotônico para se hidratar. Fazer uma caminhada leve no dia seguinte para ajudar a soltar a musculatura.";
           break;
         case "Relaxar o Corpo":
