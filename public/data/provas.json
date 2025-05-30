@@ -279,16 +279,15 @@
     "labels": ["0km", "20km", "40km", "60km", "80km", "101km"]
   },
   "26": {
-    "nome": "Madeira Island Ultra Trail - Portugal",
-    "data": "27/04/2026",
-    "diasRestantes": 73,
-    "distancia": 115,
-    "altimetria": 7100,
-    "temperatura": 18,
-    "tipo": "Montanha",
-    "elevacao": [0, 750, 1600, 2400, 1900, 1100],
-    "labels": ["0km", "23km", "46km", "69km", "92km", "115km"]
-  },
+  "nome": "Madeira Island Ultra Trail - Portugal",
+  "data": "27/04/2026",
+  "distancia": 115,
+  "altimetria": 7100,
+  "temperatura": 18,
+  "tipo": "Montanha",
+  "elevacao": [0, 1150, 1580, 30, 240, 380, 920, 1230, 600, 320, 5],
+  "labels": ["0km", "12.5km", "26km", "40.8km", "50.9km", "65.1km", "78.1km", "92.6km", "101km", "106.1km", "117.6km"]
+},
   "27": {
     "nome": "Patagonia Run - Argentina",
     "data": "06/04/2026",
