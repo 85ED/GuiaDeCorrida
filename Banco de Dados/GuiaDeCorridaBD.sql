@@ -16,37 +16,91 @@ CREATE TABLE usuario (
 
 SELECT * FROM usuario;
 
-ALTER TABLE usuario MODIFY COLUMN senha VARCHAR(64) NOT NULL COMMENT 'SHA-256 hashed';
+ALTER TABLE usuario MODIFY COLUMN senha VARCHAR(64) NOT NULL COMMENT 'SHA-256 hashed'; -- armazenará hashes SHA-256 de 64 caracteres para não expor informações
 
-CREATE TABLE preparo (
-  idpreparo INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE treino (
+  idtreino INT PRIMARY KEY AUTO_INCREMENT,
   idusuario INT,
   data_treino DATE NOT NULL,
   distancia DECIMAL(5,2) NOT NULL, -- km
   pace DECIMAL(4,2), -- min/km
-  duracao TIME, -- ajusta
+  duracao TIME,
   tipo_treino VARCHAR(50), -- regenerativo, longo, etc.
   fc_media INT, -- frequência cardíaca média (bpm)
-  observacoes TEXT, 
-  completou BOOLEAN DEFAULT FALSE, 
+  observacoes TEXT,
+  completou BOOLEAN DEFAULT FALSE,
   CONSTRAINT fk_preparo_usuario FOREIGN KEY (idusuario) REFERENCES usuario(idusuario)
 );
 
 CREATE TABLE prova (
   idprova INT PRIMARY KEY AUTO_INCREMENT,
   idusuario INT,
-  idpreparo INT,
   nome VARCHAR(100) NOT NULL,
   distancia DECIMAL(5,2) NOT NULL, -- km
   data_prova DATE NOT NULL,
   altimetria INT, -- metros
   modalidade VARCHAR(20) NOT NULL,
   CONSTRAINT chk_prova_modalidade CHECK (modalidade IN ('Montanha', 'Asfalto')),
-  CONSTRAINT fk_prova_usuario FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
-  CONSTRAINT fk_prova_preparo FOREIGN KEY (idpreparo) REFERENCES preparo(idpreparo)
+  CONSTRAINT fk_prova_usuario FOREIGN KEY (idusuario) REFERENCES usuario(idusuario)
 );
 
 SELECT * FROM prova;
+
+-- consultar usuarios pelas provas
+SELECT 
+    u.idusuario,
+    u.nome,
+    u.nivel,
+    COUNT(p.idprova) AS total_provas
+FROM 
+    usuario u
+LEFT JOIN 
+    prova p ON u.idusuario = p.idusuario
+GROUP BY 
+    u.idusuario;
+    
+-- total geral de usuarios
+SELECT COUNT(*) AS total_usuarios FROM usuario;
+
+-- contagem de Usuários por nivel
+SELECT 
+    nivel,
+    COUNT(*) AS qtd_usuarios
+FROM 
+    usuario
+GROUP BY 
+    nivel;
+
+-- consulta pra dashboard
+SELECT 
+    (SELECT COUNT(*) FROM usuario) AS total_usuarios,
+    (SELECT COUNT(*) FROM prova) AS total_provas,
+    (SELECT COUNT(*) FROM treino) AS total_treinos,
+    (SELECT COUNT(DISTINCT idusuario) FROM prova) AS usuarios_com_provas;
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 INSERT INTO preparo (idusuario, data_treino, distancia, pace, duracao, tipo_treino, fc_media, observacoes, completou) VALUES
 (1, '2025-06-01', 6, 5.0, '00:30:00', 'Asfalto', 130, 'Treino de Hoje: intervalado 6x800m em ritmo forte, com 2 minutos de trote entre as séries.', TRUE),
