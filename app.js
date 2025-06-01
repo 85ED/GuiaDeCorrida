@@ -26,7 +26,7 @@ app.listen(PORT, () => {
 });
 
 // tudo relacionado ao BOB
-const PORTA_SERVIDOR = process.env.PORTA;
+//const PORTA_SERVIDOR = process.env.PORTA;
 
 // configurando o gemini (IA)
 const chatIA = new GoogleGenAI({ apiKey: process.env.MINHA_CHAVE });
