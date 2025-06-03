@@ -62,6 +62,11 @@ GROUP BY
 -- total geral de usuarios
 SELECT COUNT(*) AS total_usuarios FROM usuario;
 
+SELECT u.nome, p.nome AS nome_prova
+FROM usuario u
+JOIN prova p ON p.idusuario = u.idusuario
+WHERE u.idusuario = 1;
+
 -- contagem de Usuários por nivel
 SELECT 
     nivel,
@@ -137,25 +142,49 @@ INSERT INTO preparo (idusuario, data_treino, distancia, pace, duracao, tipo_trei
 (1, '2025-07-10', 45, 5.0, '00:30:00', 'Montanha', 130, 'Treino de Hoje: treino de técnica em descidas, foco em postura e aterrissagem.', TRUE);
 
 
-INSERT INTO prova (idusuario, idpreparo, nome, distancia, data_prova, altimetria, modalidade) VALUES
-(1, 1, 'Maratona de Boston', 42.20, '2026-04-20', 245, 'Asfalto'),
-(1, 1, 'Maratona de Londres', 42.20, '2026-04-27', 50, 'Asfalto'),
-(1, 1, 'Maratona de Paris', 42.20, '2026-04-13', 140, 'Asfalto'),
-(1, 1, 'Maratona de Berlim', 42.20, '2026-09-27', 38, 'Asfalto'),
-(1, 1, 'Maratona de Chicago', 42.20, '2026-10-12', 40, 'Asfalto'),
-(1, 1, 'Maratona de Nova York', 42.20, '2026-11-02', 300, 'Asfalto'),
-(1, 1, 'Maratona de Tóquio', 42.20, '2026-03-02', 80, 'Asfalto'),
-(1, 1, 'Maratona da Cidade do Cabo', 42.20, '2026-09-15', 150, 'Asfalto'),
-(1, 1, 'Maratona de Roma', 42.20, '2026-03-22', 200, 'Asfalto'),
-(1, 1, 'Maratona de Viena', 42.20, '2026-04-06', 60, 'Asfalto'),
-(1, 1, 'Ultra-Trail du Mont-Blanc (UTMB)', 171.00, '2026-08-24', 10000, 'Montanha'),
-(1, 1, 'Western States 100', 160.90, '2026-06-28', 5500, 'Montanha'),
-(1, 1, 'Hardrock 100', 160.90, '2026-07-14', 10000, 'Montanha'),
-(1, 1, 'Ultra-Trail Australia', 100.00, '2026-05-17', 4400, 'Montanha'),
-(1, 1, 'Marathon des Sables', 250.00, '2026-04-12', 1000, 'Montanha'),
-(1, 1, 'Ultra Pirineu', 100.00, '2026-09-28', 6600, 'Montanha'),
-(1, 1, 'TDS (Sur les Traces des Ducs de Savoie)', 145.00, '2026-08-26', 9100, 'Montanha'),
-(1, 1, 'Maratona da Muralha da China', 42.20, '2026-05-01', 5164, 'Montanha'),
-(1, 1, 'Eiger Ultra Trail', 101.00, '2026-07-20', 6700, 'Montanha'),
-(1, 1, 'Ultra Fiord', 100.00, '2026-04-18', 4500, 'Montanha');
+
+-- provas cadastradas em sistema
+
+CREATE TABLE provas_json (
+  idjson INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  distancia DECIMAL(6,3) NOT NULL,
+  data_prova DATE NOT NULL,
+  altimetria INT,
+  modalidade VARCHAR(20) NOT NULL,
+  CONSTRAINT chk_modalidade CHECK (modalidade IN ('Montanha', 'Asfalto'))
+);
+
+INSERT INTO provas_json (nome, distancia, data_prova, altimetria, modalidade) VALUES
+('Maratona de Boston - Estados Unidos', 42.195, '2026-04-21', 250, 'Asfalto'),
+('Maratona de Londres - Reino Unido', 42.195, '2026-04-27', 100, 'Asfalto'),
+('Maratona de Nova York - Estados Unidos', 42.195, '2025-11-02', 300, 'Asfalto'),
+('Maratona de Berlim - Alemanha', 42.195, '2025-09-28', 50, 'Asfalto'),
+('Maratona de Chicago - Estados Unidos', 42.195, '2025-10-12', 80, 'Asfalto'),
+('Maratona de Tóquio - Japão', 42.195, '2026-03-02', 100, 'Asfalto'),
+('Maratona de Paris - França', 42.195, '2026-04-06', 120, 'Asfalto'),
+('Maratona de Roma - Itália', 42.195, '2026-03-16', 150, 'Asfalto'),
+('Maratona de Barcelona - Espanha', 42.195, '2026-03-09', 130, 'Asfalto'),
+('Maratona de Valência - Espanha', 42.195, '2025-12-07', 90, 'Asfalto'),
+('Maratona de Amsterdã - Holanda', 42.195, '2025-10-19', 70, 'Asfalto'),
+('Maratona de Sevilha - Espanha', 42.195, '2026-02-23', 60, 'Asfalto'),
+('Maratona de Praga - República Tcheca', 42.195, '2026-05-04', 110, 'Asfalto'),
+('Maratona de Viena - Áustria', 42.195, '2026-04-27', 90, 'Asfalto'),
+('Maratona de Reiquejavique - Islândia', 42.195, '2025-08-23', 60, 'Asfalto'),
+('UTMB Mont Blanc - França / Itália / Suíça', 171, '2025-08-30', 10000, 'Montanha'),
+('Western States 100 - Estados Unidos', 161, '2025-06-28', 5500, 'Montanha'),
+('Hardrock 100 - Estados Unidos', 160, '2025-07-12', 10200, 'Montanha'),
+('Transvulcania - Espanha', 74, '2026-05-10', 4350, 'Montanha'),
+('Zegama-Aizkorri - Espanha', 42, '2026-05-25', 2736, 'Montanha'),
+('Mont-Blanc Marathon - França / Itália', 42, '2025-06-30', 2800, 'Montanha'),
+('Lavaredo Ultra Trail - Itália', 120, '2025-06-27', 5800, 'Montanha'),
+('Ultra Pirineu - Espanha', 100, '2025-09-28', 6600, 'Montanha'),
+('TDS - Sur les Traces des Ducs de Savoie - França / Suíça / Itália', 145, '2025-08-28', 9100, 'Montanha'),
+('Eiger Ultra Trail - Suíça', 101, '2025-07-20', 6700, 'Montanha'),
+('Madeira Island Ultra Trail - Portugal', 115, '2026-04-27', 7100, 'Montanha'),
+('Patagonia Run - Argentina', 100, '2026-04-06', 4600, 'Montanha'),
+('La Mision Brasil - Brasil', 35, '2025-08-18', 2781, 'Montanha'),
+('Ultra Trail Chapada dos Veadeiros - Brasil', 50, '2025-06-15', 1800, 'Montanha'),
+('K42 Bombinhas', 42, '2025-11-10', 2500, 'Montanha');
+
 

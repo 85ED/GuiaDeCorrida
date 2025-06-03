@@ -15,8 +15,12 @@ app.use(express.urlencoded({ extended: true }));
 const usuarioRouter = require("./src/routes/usuarios");
 app.use("/usuarios", usuarioRouter);
 
+const provaRouter = require("./src/routes/provas");
+app.use("/provas", provaRouter);
+
+
+
 // configurando o servidor para servir arquivos estáticos
-app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
@@ -26,7 +30,6 @@ app.listen(PORT, () => {
 });
 
 // tudo relacionado ao BOB
-//const PORTA_SERVIDOR = process.env.PORTA;
 
 // configurando o gemini (IA)
 const chatIA = new GoogleGenAI({ apiKey: process.env.MINHA_CHAVE });

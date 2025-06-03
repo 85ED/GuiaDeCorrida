@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 </head>
 
-<body onload="validarSessao(); listarProvasFuturas();">
+<body>
   <header>
     <div class="container cabecalho">
       <img src="./img/logo_black.png" alt="Guia de Corrida" class="logo-site" />
@@ -76,15 +76,15 @@
           <div id="conteudo_info"
             style="margin-top: 20px; padding: 20px; border: 1px solid #ccc; min-height: 150px; width: 100%; background-color: #f9f9f9; border-radius: 8px;">
           </div>
+
         </div>
+        <button onclick="gravarProva()">Gravar Prova</button>
+        <button onclick="carregarProvasGravadas()">Minhas Provas</button>
+        <div id="lista_provas_usuario" style="margin-top: 20px; font-family: sans-serif;"></div>
+
         <div style="margin-top: 30px;">
-          <button id="botao_inserir_prova" onclick="inserirProva()">Planejar Prova</button>
-          <div id="msg-inserir" style="margin-top: 10px; color: green;"></div>
-        </div>
-        <div id="provas-futuras">
-          <h3>Provas Futuras</h3>
-          <div id="provas_gravadas"></div>
-          <!-- provas carregadas aqui -->
+
+
           </ul>
         </div>
       </div>
@@ -159,14 +159,6 @@
             style="margin-top: 20px; padding: 20px; border: 1px solid #ccc; min-height: 150px; width: 100%; background-color: #f9f9f9; border-radius: 8px;">
           </div>
         </div>
-        <!-- Botão Strava Importar -->
-        <div style="margin-top: 20px;">
-          <button onclick="importarStrava()"
-            style="display: flex; align-items: center; gap: 8px; background-color: #fc4c02; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;">
-            <img src="./img/icon_strava.png" alt="Strava" style="width: 20px; height: 20px;">
-            Importar Resultado do Strava
-          </button>
-        </div>
       </div>
 
   </main>
@@ -189,8 +181,9 @@
   <!-- Link para JS externo -->
   <script src="./js/graficos.js"></script>
   <script>
-    window.onload = carregarProvasGravadas;
+    window.onload = validarSessao;
   </script>
+
 
 </body>
 

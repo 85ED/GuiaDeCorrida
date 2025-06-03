@@ -1,25 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Isso aqui roda quando a página termina de carregar
   const localizacao = document.getElementById("localizacao");
   const selectProva = document.getElementById("selecao_prova");
+    var ultimaProvaExibida = null; // Guarda qual prova tá mostrando agora
 
+
+  // Mostra a data atual bonitinha no cabeçalho
   const dataAtual = new Date().toLocaleDateString("pt-BR");
   localizacao.textContent = `São Paulo, ${dataAtual}`;
 
-  // vetor pra dar bom dia, boa tarde e boa noite
+  // Verifica que horas são pra dar bom dia/boa tarde
   const mensagens = ["Boa noite", "Bom dia", "Boa tarde", "Boa noite"];
   const hora = new Date().getHours();
   var saudacao = "";
 
-  if (hora >= 6 && hora < 12) {
-    saudacao = mensagens[1];
-  } else if (hora >= 12 && hora < 18) {
-    saudacao = mensagens[2];
-  } else if (hora >= 0 && hora < 6) {
-    saudacao = mensagens[0];
-  } else {
-    saudacao = mensagens[3];
+  function obterSaudacao(hora) {
+    if (hora >= 6 && hora < 12) return "Bom dia";
+    if (hora >= 12 && hora < 18) return "Boa tarde";
+    if (hora >= 0 && hora < 6) return "Boa noite";
+    return "Boa noite";
   }
 
+  var saudacao = obterSaudacao(hora);
+
+  // Procura o nome do usuário pra dar a mensagem de boas-vindas
   const intervalo = setInterval(() => {
     const nomeUsuario = document.getElementById("b_usuario")?.innerText;
     if (nomeUsuario) {
@@ -28,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (el) el.textContent = saudacaoCompleta;
       clearInterval(intervalo);
     }
-  }, 100);
+  }, 100); // Tenta achar o nome 10x por segundo
 
   fetch("./data/provas.json")
     .then((res) => res.json())
@@ -37,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const idsOrdenados = Object.keys(provas).sort((a, b) => {
         return provas[a].nome.localeCompare(provas[b].nome);
       });
-      // Adiciona as opções ordenadas
+      // Preenche o seletor de provas
       idsOrdenados.forEach((id) => {
         const option = document.createElement("option");
         option.value = id;
@@ -45,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         selectProva.appendChild(option);
       });
 
-      // campo de pesquisa das provas
+      // Transforma o select numa caixa de pesquisa chique
       new TomSelect("#selecao_prova", {
         create: false,
         sortField: {
@@ -55,10 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
         placeholder: "Digite ou selecione uma uma prova..."
       });
 
-      // Atualiza os dados na primeira prova como padrão
+      // Mostra a primeira prova como padrão
       atualizarProva(provas, Object.keys(provas)[0]);
 
-      // Adiciona o evento de troca de prova
+      // Atualiza quando muda a prova selecionada
       selectProva.addEventListener("change", () => {
         const idSelecionado = selectProva.value;
         atualizarProva(provas, idSelecionado);
@@ -68,13 +72,11 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Erro ao carregar o JSON:", erro);
     });
 
-  // Executa cálculo da zona 2 ao carregar
-  calcular_zona2();
 });
-
+// Desenha o gráfico de altimetria
 function desenharGraficoChartJS(labels, dados) {
   const ctx = document.getElementById("graficoAltimetria").getContext("2d");
-
+  // Apaga o gráfico anterior se existir
   if (window.meuGrafico) {
     window.meuGrafico.destroy();
   }
@@ -88,14 +90,14 @@ function desenharGraficoChartJS(labels, dados) {
         borderColor: "blue",
         backgroundColor: "lightblue",
         fill: true,
-        tension: 0.4
+        tension: 0.4 // Deixa a linha mais suave
       }]
     },
     options: {
       responsive: true,
       plugins: {
         legend: {
-          display: false
+          display: false // Esconde a legenda
         },
         title: {
           display: true,
@@ -128,15 +130,27 @@ function desenharGraficoChartJS(labels, dados) {
   });
 }
 
-var ultimaProvaExibida = null;
-
+// Atualiza todas as informações quando muda a prova
 function atualizarProva(provas, id) {
   const prova = provas[id];
-  const hoje = new Date();
+  // Calcula quantos dias faltam pra prova
+  // Exemplo: se a data da prova for "21/04/2026"
+  // 1. .split("/") divide em partes: ["21", "04", "2026"]
+  // 2. map(Number) transforma em números: [21, 4, 2026]
   const [dia, mes, ano] = prova.data.split("/").map(Number);
+  // 3. Cria uma data no formato que o JavaScript entende (mês começa do zero)
+  //    Ex: new Date(2026, 3, 21) significa 21 de abril de 2026
   const dataProva = new Date(ano, mes - 1, dia);
+  // 4. Pega a data de hoje
+  var hoje = new Date();
+  // 5. Subtrai a data da prova menos a data de hoje (em milissegundos)
+  // 6. Divide esse número para transformar em dias
+  //    1000 ms * 60 s * 60 min * 24 h = total de milissegundos em 1 dia
+  // 7. Math.ceil arredonda pra cima, pois 2,3 dias ainda são 3 dias faltando
   const diferenca = Math.ceil((dataProva - hoje) / (1000 * 60 * 60 * 24));
+  // Resultado: se hoje for 18/04/2026, o resultado será 3
 
+  // Atualiza o card principal
   document.getElementById("proximo_desafio").textContent =
     `Prova: ${prova.nome} (${prova.data}, faltam ${diferenca} dias)`;
 
@@ -147,10 +161,10 @@ function atualizarProva(provas, id) {
 
   ultimaProvaExibida = prova;
 
+  // Atualiza o gráfico
   desenharGraficoChartJS(prova.labels, prova.elevacao);
 
   // planejamento antes da prova e execucao
-
   var menuLinks = document.getElementById("menu_links");
   menuLinks.innerHTML = "";
 
@@ -158,18 +172,18 @@ function atualizarProva(provas, id) {
   conteudoInfo.innerHTML = "";
 
   var botoes = [];
-
+  // Escolhe os botões conforme o tipo de prova
   if (prova.tipo === "Asfalto") {
     botoes = ["Sobre a Prova (IA)", "Pace", "Recorde Mundial", "Treino"];
   } else if (prova.tipo === "Montanha") {
     botoes = ["Sobre a Prova (IA)", "Técnicas de Subida", "Equipamentos", "Treino"];
   }
-
-  botoes.forEach(function (botao) {
+  // pra cada item da lista botoes, cria um botão com aquele nome e coloca ele na tela
+  botoes.forEach(function (botao) { 
     var a = document.createElement("a");
     a.href = "#";
     a.textContent = botao;
-
+    // teste colocar estilo direto pelo js
     a.style.marginRight = "10px";
     a.style.marginBottom = "10px";
     a.style.marginRight = "10px";
@@ -188,7 +202,7 @@ function atualizarProva(provas, id) {
     a.addEventListener("mouseleave", function () {
       a.style.backgroundColor = "transparent";
     });
-
+    // O que acontece quando clica em cada botão
     a.addEventListener("click", function (e) {
       e.preventDefault();
 
@@ -206,6 +220,7 @@ function atualizarProva(provas, id) {
               conteudoInfo.textContent = `A prova ${prova.nome} é uma das mais importantes no mundo da corrida.`;
             });
           return;
+                  // Respostas fixas para os outros botões
         case "Pace":
           texto = "Use a calculadora de pace logo abaixo para planejar seu ritmo ideal para a distância.";
           break;
@@ -227,8 +242,8 @@ function atualizarProva(provas, id) {
               var treinosFiltrados = treinos.filter(function (t) {
                 return t.tipo === prova.tipo;
               });
-
-              var indice = Math.floor(treinoRandomico * treinosFiltrados.length);
+          // Pega um treino aleatório do JSON
+              var indice = Math.floor(Math.random() * treinosFiltrados.length);
               var treinoSelecionado = treinosFiltrados[indice];
 
               conteudoInfo.textContent = treinoSelecionado
@@ -392,37 +407,79 @@ async function gerarResposta(pergunta) {
   return data.resultado;
 }
 
-// inserir prova
+// vincular prova ao usuario
 
-function inserirProva() {
-  if (!ultimaProvaExibida) {
+function gravarProva() {
+  var idusuario = sessionStorage.ID_USUARIO;
+  if (!idusuario) {
+    alert("Usuário não logado.");
+    return;
+  }
+
+  if (!ultimaProvaExibida || !ultimaProvaExibida.nome) {
     alert("Nenhuma prova selecionada.");
     return;
   }
 
-  var prova = ultimaProvaExibida;
+  var dados = {
+    idusuario: idusuario,
+    nome: ultimaProvaExibida.nome
+  };
 
-  // Formata a data no formato YYYY-MM-DD
-  var [dia, mes, ano] = prova.data.split("/");
-  var dataFormatada = `${ano}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`;
-
-  // Cria uma nova div com as informações da prova
-  var novaDiv = document.createElement("div");
-  novaDiv.textContent = `${prova.nome} - ${prova.distancia} km - ${prova.tipo} - ${dataFormatada}`;
-  document.getElementById("provas_gravadas").appendChild(novaDiv);
-
-  // Salva localmente (opcional)
-  var provasSalvas = JSON.parse(localStorage.getItem("provasGravadas")) || [];
-  provasSalvas.push({
-    nome: prova.nome,
-    distancia: prova.distancia,
-    tipo: prova.tipo,
-    data: dataFormatada,
-    altimetria: prova.altimetria
+  fetch('http://localhost:3000/provas/gravar', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dados)
+  })
+  .then(function (res) {
+    return res.json();
+  })
+  .then(function (resposta) {
+    if (resposta.mensagem) {
+      alert(resposta.mensagem);
+    } else {
+      alert("Erro ao gravar prova.");
+      console.error(resposta);
+    }
+  })
+  .catch(function (erro) {
+    console.error("Erro na requisição:", erro);
+    alert("Falha ao enviar dados.");
   });
-  localStorage.setItem("provasGravadas", JSON.stringify(provasSalvas));
-
-  alert("Prova gravada com sucesso!");
 }
 
+function carregarProvasGravadas() {
+  var idusuario = sessionStorage.ID_USUARIO;
+  if (!idusuario) {
+    alert("Usuário não logado.");
+    return;
+  }
 
+  fetch(`http://localhost:3000/provas/usuario/${idusuario}`)
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (provas) {
+      var container = document.getElementById("lista_provas_usuario");
+      if (!container) return;
+
+      container.innerHTML = "";
+
+      if (provas.length === 0) {
+        container.innerHTML = "<p>Você ainda não gravou nenhuma prova.</p>";
+        return;
+      }
+
+      provas.forEach(function (prova) {
+        var item = document.createElement("div");
+        item.style.marginBottom = "10px";
+        item.textContent = `${prova.nome} (${prova.data_prova}) - ${prova.distancia} km | ${prova.modalidade}`;
+        container.appendChild(item);
+      });
+    })
+    .catch(function (erro) {
+      console.error("Erro ao buscar provas do usuário:", erro);
+    });
+}

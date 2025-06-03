@@ -159,3 +159,41 @@ INSERT INTO prova (idusuario, idpreparo, nome, distancia, data_prova, altimetria
 (1, 1, 'Eiger Ultra Trail', 101.00, '2026-07-20', 6700, 'Montanha'),
 (1, 1, 'Ultra Fiord', 100.00, '2026-04-18', 4500, 'Montanha');
 
+
+
+
+
+
+
+
+
+function inserirProva() {
+  if (!ultimaProvaExibida) {
+    alert("Nenhuma prova selecionada.");
+    return;
+  }
+
+  var prova = ultimaProvaExibida;
+
+  // Formata a data no formato YYYY-MM-DD
+  var [dia, mes, ano] = prova.data.split("/");
+  var dataFormatada = `${ano}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`;
+
+  // Cria uma nova div com as informações da prova
+  var novaDiv = document.createElement("div");
+  novaDiv.textContent = `${prova.nome} - ${prova.distancia} km - ${prova.tipo} - ${dataFormatada}`;
+  document.getElementById("provas_gravadas").appendChild(novaDiv);
+
+  // Salva localmente (opcional)
+  var provasSalvas = JSON.parse(localStorage.getItem("provasGravadas")) || [];
+  provasSalvas.push({
+    nome: prova.nome,
+    distancia: prova.distancia,
+    tipo: prova.tipo,
+    data: dataFormatada,
+    altimetria: prova.altimetria
+  });
+  localStorage.setItem("provasGravadas", JSON.stringify(provasSalvas));
+
+  alert("Prova gravada com sucesso!");
+}
