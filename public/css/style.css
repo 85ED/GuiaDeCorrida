@@ -51,11 +51,11 @@ header .wrapper {
 }
 
 #menu li a.ativo {
-  color: #f39c12; 
-  font-weight: bold;
+    color: #f39c12;
+    font-weight: bold;
 }
 
-#menu li a.botao-login { 
+#menu li a.botao-login {
     background-color: #ff7f00;
     color: white !important;
     border-radius: 5px;
@@ -180,7 +180,7 @@ header .wrapper {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     text-align: left;
-    gap: 20px; 
+    gap: 20px;
 }
 
 .processo_corrida h2 {
@@ -210,7 +210,7 @@ header .wrapper {
     border-radius: 8px;
     margin-bottom: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer; 
+    cursor: pointer;
     margin: 0 auto 15px;
 }
 
@@ -353,8 +353,8 @@ footer a:hover {
     font-size: 28px;
     margin-bottom: 20px;
     color: #2e2e2e;
-    text-align: center; 
-    border-left: none; 
+    text-align: center;
+    border-left: none;
 }
 
 .form-group {
@@ -423,19 +423,19 @@ footer a:hover {
 }
 
 .containerImagem {
-    flex: 1 1 300px; 
+    flex: 1 1 300px;
     display: flex;
-    overflow: hidden; 
-    border-radius: 8px; 
-    min-height: 300px; 
+    overflow: hidden;
+    border-radius: 8px;
+    min-height: 300px;
 }
 
 .imagem-logo-cadastro {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
-    object-position: center; 
-    transition: transform 0.3s ease; 
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
 }
 
 .containerImagem:hover .imagem-logo-cadastro {
@@ -490,63 +490,69 @@ footer a:hover {
         align-items: center;
         text-align: center;
     }
-    
+
     .banner h2 {
         font-size: 2em;
         margin-right: 0;
     }
-    
+
     .slogan {
         font-size: 1.2em;
         margin-bottom: 20px;
     }
-    
+
     .processo_corrida {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .bloco-processo {
         width: 80%;
         margin-bottom: 20px;
     }
-    
+
     .depoimento-container {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .depoimento-texto {
         margin-bottom: 20px;
     }
-    
+
     .containerAllCadastro {
         flex-direction: column;
         padding: 20px 10px;
     }
-    
+
     .containerImagem,
     .container-cadastro {
         width: 100%;
     }
-    
+
     .contact-section {
         flex-direction: column;
         height: auto;
     }
-    
+
     .left-image,
     .right-form {
         width: 100%;
     }
-    
+
     .left-image {
         height: 300px;
     }
 }
 
-.hidden {
+#formLogin {
   display: none;
+}
+
+#formCadastro {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .tooltip {
@@ -567,7 +573,7 @@ footer a:hover {
     padding: 5px;
     position: absolute;
     z-index: 1;
-    top: 125%; 
+    top: 125%;
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
@@ -595,7 +601,3 @@ footer a:hover {
 .velocidade:hover {
     background-color: #e67000;
 }
-
-
-
-
