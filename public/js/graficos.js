@@ -2,8 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Isso aqui roda quando a página termina de carregar
   const localizacao = document.getElementById("localizacao");
   const selectProva = document.getElementById("selecao_prova");
-    var ultimaProvaExibida = null; // Guarda qual prova tá mostrando agora
-
+  var ultimaProvaExibida = null; // Guarda qual prova tá mostrando agora
 
   // Mostra a data atual bonitinha no cabeçalho
   const dataAtual = new Date().toLocaleDateString("pt-BR");
@@ -35,18 +34,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 100); // Tenta achar o nome 10x por segundo
 
   fetch("./data/provas.json")
+    // Quando a resposta chega, converte o conteúdo para um objeto JavaScript
     .then((res) => res.json())
     .then((provas) => {
-      // Preenche o dropdown
+      // Primeiro, pegamos todos os IDs das provas e colocamos em ordem alfabética pelo nome
       const idsOrdenados = Object.keys(provas).sort((a, b) => {
+        // Aqui comparamos os nomes das provas para deixar a lista organizada no select
         return provas[a].nome.localeCompare(provas[b].nome);
       });
-      // Preenche o seletor de provas
+
+      // Agora, para cada prova ordenada, criamos uma opção no seletor de provas
       idsOrdenados.forEach((id) => {
-        const option = document.createElement("option");
-        option.value = id;
-        option.textContent = provas[id].nome.trim();
-        selectProva.appendChild(option);
+        const option = document.createElement("option");      // Cria o elemento <option>
+        option.value = id;                                    // Define o valor como o ID da prova
+        option.textContent = provas[id].nome.trim();          // Mostra o nome da prova como texto visível
+        selectProva.appendChild(option);                      // Adiciona essa opção no <select> da tela
       });
 
       // Transforma o select numa caixa de pesquisa chique
@@ -74,38 +76,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 // Desenha o gráfico de altimetria
+// Essa função desenha um gráfico usando a biblioteca Chart.js
+// Ela recebe dois parâmetros: `labels` (para o eixo X) e `dados` (para o eixo Y)
 function desenharGraficoChartJS(labels, dados) {
+  // Aqui pegamos o contexto do canvas onde o gráfico será desenhado
   const ctx = document.getElementById("graficoAltimetria").getContext("2d");
-  // Apaga o gráfico anterior se existir
+
+  // Se já existir um gráfico desenhado antes, destruímos ele pra não sobrepor
   if (window.meuGrafico) {
     window.meuGrafico.destroy();
   }
 
+  // Criamos um novo gráfico do tipo linha
   window.meuGrafico = new Chart(ctx, {
-    type: "line",
+    type: "line", // Tipo de gráfico: linha
+
+    // Aqui definimos os dados que serão exibidos no gráfico
     data: {
-      labels: labels,
+      labels: labels, // Rótulos no eixo X (ex: km 1, km 2, etc)
       datasets: [{
-        data: dados,
-        borderColor: "blue",
-        backgroundColor: "lightblue",
-        fill: true,
-        tension: 0.4 // Deixa a linha mais suave
+        data: dados, // Valores no eixo Y (ex: altimetria acumulada)
+        borderColor: "blue", // Cor da linha
+        backgroundColor: "lightblue", // Cor de fundo da área sob a linha
+        fill: true, // Preenche a área sob a linha
+        tension: 0.4 // Deixa a curva suave (0 = linha reta entre os pontos)
       }]
     },
+
+    // Opções de aparência e comportamento do gráfico
     options: {
-      responsive: true,
+      responsive: true, // Faz o gráfico se adaptar ao tamanho da tela
       plugins: {
         legend: {
-          display: false // Esconde a legenda
+          display: false // Esconde a legenda (já que só tem uma linha)
         },
         title: {
           display: true,
-          text: "Distância e Altimetria Acumulada",
+          text: "Distância e Altimetria Acumulada", // Título do gráfico
           font: {
             size: 18
           },
-          color: "#0a1f56",
+          color: "#0a1f56", // Cor do título
           padding: {
             top: 10,
             bottom: 20
@@ -116,19 +127,22 @@ function desenharGraficoChartJS(labels, dados) {
         x: {
           title: {
             display: true,
-            text: "Distância em Quilômetros (km)"
+            text: "Distância em Quilômetros (km)" // Título do eixo X
           }
         },
         y: {
           title: {
             display: true,
-            text: "Altimetria em Metros (m)"
+            text: "Altimetria em Metros (m)" // Título do eixo Y
           }
         }
       }
     }
   });
 }
+
+var conteudoInfo = null; // para os botões de planejamento BobIA
+var conteudoInf = null;  // para os botões de recuperação BobIA
 
 // Atualiza todas as informações quando muda a prova
 function atualizarProva(provas, id) {
@@ -149,10 +163,9 @@ function atualizarProva(provas, id) {
   // 7. Math.ceil arredonda pra cima, pois 2,3 dias ainda são 3 dias faltando
   const diferenca = Math.ceil((dataProva - hoje) / (1000 * 60 * 60 * 24));
   // Resultado: se hoje for 18/04/2026, o resultado será 3
-
   // Atualiza o card principal
   document.getElementById("proximo_desafio").textContent =
-    `Prova: ${prova.nome} (${prova.data}, faltam ${diferenca} dias)`;
+    `Prova: ${prova.nome} (${prova.data})`;
 
   document.getElementById("distancia").textContent = `${prova.distancia} Km`;
   document.getElementById("altimetria").textContent = prova.altimetria;
@@ -168,7 +181,7 @@ function atualizarProva(provas, id) {
   var menuLinks = document.getElementById("menu_links");
   menuLinks.innerHTML = "";
 
-  var conteudoInfo = document.getElementById("conteudo_info");
+  conteudoInfo = document.getElementById("conteudo_info"); // texto inicial da IA
   conteudoInfo.innerHTML = "";
 
   var botoes = [];
@@ -179,11 +192,11 @@ function atualizarProva(provas, id) {
     botoes = ["Sobre a Prova (IA)", "Técnicas de Subida", "Equipamentos", "Treino"];
   }
   // pra cada item da lista botoes, cria um botão com aquele nome e coloca ele na tela
-  botoes.forEach(function (botao) { 
+  botoes.forEach(function (botao) {
     var a = document.createElement("a");
     a.href = "#";
     a.textContent = botao;
-    // teste colocar estilo direto pelo js
+    // estudando usar estilo direto pelo js
     a.style.marginRight = "10px";
     a.style.marginBottom = "10px";
     a.style.marginRight = "10px";
@@ -211,6 +224,7 @@ function atualizarProva(provas, id) {
 
       switch (botao) {
         case "Sobre a Prova (IA)":
+          conteudoInfo.textContent = "Consultando IA sobre a prova...";
           var nomeUsuario = document.getElementById("b_usuario")?.innerText || "o corredor";
           gerarResposta(`Em um parágrafo, fale para ${nomeUsuario} sobre a prova ${prova.nome}.`)
             .then(function (respostaIA) {
@@ -220,7 +234,7 @@ function atualizarProva(provas, id) {
               conteudoInfo.textContent = `A prova ${prova.nome} é uma das mais importantes no mundo da corrida.`;
             });
           return;
-                  // Respostas fixas para os outros botões
+        // Respostas fixas para os outros botões
         case "Pace":
           texto = "Use a calculadora de pace logo abaixo para planejar seu ritmo ideal para a distância.";
           break;
@@ -242,7 +256,7 @@ function atualizarProva(provas, id) {
               var treinosFiltrados = treinos.filter(function (t) {
                 return t.tipo === prova.tipo;
               });
-          // Pega um treino aleatório do JSON
+              // Pega um treino aleatório do JSON
               var indice = Math.floor(Math.random() * treinosFiltrados.length);
               var treinoSelecionado = treinosFiltrados[indice];
 
@@ -267,7 +281,7 @@ function atualizarProva(provas, id) {
   var menuLink = document.getElementById("menu_recupera");
   menuLink.innerHTML = "";
 
-  var conteudoInf = document.getElementById("recupera_info");
+  conteudoInf = document.getElementById("recupera_info"); // texto inicial da IA
   conteudoInf.innerHTML = "";
 
   var opcoes = [];
@@ -433,21 +447,21 @@ function gravarProva() {
     },
     body: JSON.stringify(dados)
   })
-  .then(function (res) {
-    return res.json();
-  })
-  .then(function (resposta) {
-    if (resposta.mensagem) {
-      alert(resposta.mensagem);
-    } else {
-      alert("Erro ao gravar prova.");
-      console.error(resposta);
-    }
-  })
-  .catch(function (erro) {
-    console.error("Erro na requisição:", erro);
-    alert("Falha ao enviar dados.");
-  });
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (resposta) {
+      if (resposta.mensagem) {
+        alert(resposta.mensagem);
+      } else {
+        alert("Erro ao gravar prova.");
+        console.error(resposta);
+      }
+    })
+    .catch(function (erro) {
+      console.error("Erro na requisição:", erro);
+      alert("Falha ao enviar dados.");
+    });
 }
 
 function carregarProvasGravadas() {

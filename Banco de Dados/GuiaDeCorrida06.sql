@@ -62,19 +62,23 @@ GROUP BY
 -- total geral de usuarios
 SELECT COUNT(*) AS total_usuarios FROM usuario;
 
-SELECT u.nome, p.nome AS nome_prova
+-- select de usuario por prova
+SELECT u.nome as Nome, p.nome as nome_prova, p.modalidade as Modalidade
 FROM usuario u
 JOIN prova p ON p.idusuario = u.idusuario
 WHERE u.idusuario = 1;
 
--- contagem de Usuários por nivel
+-- Contagem de usuários por nível e modalidade
 SELECT 
-    nivel,
+    p.modalidade AS Modalidade,
+    u.nivel,
     COUNT(*) AS qtd_usuarios
 FROM 
-    usuario
+    usuario u 
+JOIN 
+    prova p ON p.idusuario = u.idusuario
 GROUP BY 
-    nivel;
+    p.modalidade, u.nivel;
 
 -- consulta pra dashboard
 SELECT 

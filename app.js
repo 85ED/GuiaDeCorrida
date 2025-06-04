@@ -18,8 +18,6 @@ app.use("/usuarios", usuarioRouter);
 const provaRouter = require("./src/routes/provas");
 app.use("/provas", provaRouter);
 
-
-
 // configurando o servidor para servir arquivos estáticos
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
