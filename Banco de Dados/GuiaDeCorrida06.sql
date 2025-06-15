@@ -191,4 +191,10 @@ INSERT INTO provas_json (nome, distancia, data_prova, altimetria, modalidade) VA
 ('Ultra Trail Chapada dos Veadeiros - Brasil', 50, '2025-06-15', 1800, 'Montanha'),
 ('K42 Bombinhas', 42, '2025-11-10', 2500, 'Montanha');
 
-
+CREATE TABLE recuperacao_senha (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  idusuario INT,
+  token VARCHAR(255) UNIQUE,
+  expiracao DATETIME,
+  FOREIGN KEY (idusuario) REFERENCES usuario(idusuario)
+);

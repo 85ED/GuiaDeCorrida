@@ -1,3 +1,5 @@
+const API_URL = 'http://localhost:3000'; // ou sua URL real em produção
+
 /* ===== Troca de telas ===== */
 function mostrarLogin() {
   document.getElementById("formCadastro").style.display = "none";

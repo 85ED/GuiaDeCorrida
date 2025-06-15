@@ -6,10 +6,50 @@ const pool = mysql.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  port: Number(process.env.DB_PORT), 
+  port: Number(process.env.DB_PORT),
   waitForConnections: true,
   connectionLimit: 10
 });
+
+// --- FUNÇÕES AUXILIARES ---
+
+async function buscarPorEmail(email) {
+  return await pool.query('SELECT * FROM usuario WHERE email = ?', [email]);
+}
+
+async function salvarTokenRecuperacao(idusuario, token, expiracao) {
+  return await pool.query(
+    'INSERT INTO recuperacao_senha (idusuario, token, expiracao) VALUES (?, ?, ?)',
+    [idusuario, token, expiracao]
+  );
+}
+
+async function buscarPorToken(token) {
+  return await pool.query(
+    `SELECT r.idusuario 
+     FROM recuperacao_senha r 
+     JOIN usuario u ON r.idusuario = u.idusuario 
+     WHERE r.token = ? AND r.expiracao > NOW()`,
+    [token]
+  );
+}
+
+async function redefinirSenha(idusuario, novaSenha) {
+  const hashSenha = await bcrypt.hash(novaSenha, 12);
+  return await pool.query(
+    'UPDATE usuario SET senha = ? WHERE idusuario = ?',
+    [hashSenha, idusuario]
+  );
+}
+
+async function invalidarToken(token) {
+  return await pool.query(
+    'DELETE FROM recuperacao_senha WHERE token = ?',
+    [token]
+  );
+}
+
+// --- MÉTODOS PRINCIPAIS ---
 
 module.exports = {
   async cadastrar(nome, email, telefone, senha) {
@@ -45,5 +85,11 @@ module.exports = {
     } finally {
       connection.release();
     }
-  }
+  },
+
+  buscarPorEmail,
+  salvarTokenRecuperacao,
+  buscarPorToken,
+  redefinirSenha,
+  invalidarToken
 };

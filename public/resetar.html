@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Redefinir Senha</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="icon" href="./img/gc.png" type="GC"/>
+  <style>
+    .hidden { display: none; }
+    .mensagem { margin-top: 15px; font-size: 14px; text-align: center; }
+  </style>
+</head>
+
+<body class="corpo">
+  <hr size="4px" color="#0cc0df" class="linha-cima-cadastro"/>
+
+  <div class="containerAll containerAllCadastro">
+    <div class="containerImagem">
+      <img src="./img/66.jpg" class="imagem-logo-cadastro" alt="Logo do site" />
+    </div>
+
+    <div class="container-cadastro">
+      <h1 class="titulo">Redefinir Senha</h1>
+      <span class="linha-fina linha-fina-cadastro"></span>
+
+      <label class="label">Nova Senha*</label>
+      <input type="password" class="input" id="novaSenha" placeholder="Digite a nova senha" />
+
+      <label class="label">Confirmar Senha*</label>
+      <input type="password" class="input" id="confirmarSenha" placeholder="Confirme a senha" />
+
+      <button onclick="enviarNovaSenha()" class="botao" id="botaoRedefinir">REDEFINIR SENHA</button>
+
+      <div id="mensagem" class="mensagem"></div>
+    </div>
+  </div>
+
+  <hr size="4px" color="#0cc0df" class="linha-baixo-cadastro"/>
+
+  <script>
+    window.onload = () => {
+      document.getElementById("novaSenha").focus();
+    };
+
+    async function enviarNovaSenha() {
+      const senha = document.getElementById("novaSenha").value;
+      const confirmar = document.getElementById("confirmarSenha").value;
+      const mensagem = document.getElementById("mensagem");
+      const botao = document.getElementById("botaoRedefinir");
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get("token");
+
+      if (!token) {
+        mensagem.innerHTML = "Token inválido ou ausente.";
+        mensagem.style.color = "red";
+        return;
+      }
+
+      if (!senha || !confirmar) {
+        mensagem.innerHTML = "Preencha os dois campos.";
+        mensagem.style.color = "red";
+        return;
+      }
+
+      if (senha !== confirmar) {
+        mensagem.innerHTML = "As senhas não coincidem.";
+        mensagem.style.color = "red";
+        return;
+      }
+
+      botao.disabled = true;
+      botao.innerText = "Enviando...";
+
+      try {
+        const resposta = await fetch("http://localhost:3000/usuarios/resetar-senha", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token, novaSenha: senha })
+        });
+
+        const data = await resposta.json();
+
+        if (resposta.ok) {
+          mensagem.innerHTML = data.message || "Senha redefinida com sucesso!";
+          mensagem.style.color = "green";
+        } else {
+          mensagem.innerHTML = data.error || "Erro ao redefinir a senha.";
+          mensagem.style.color = "red";
+        }
+      } catch (e) {
+        mensagem.innerHTML = "Erro na requisição. Tente novamente.";
+        mensagem.style.color = "red";
+      } finally {
+        botao.disabled = false;
+        botao.innerText = "REDEFINIR SENHA";
+      }
+    }
+  </script>
+</body>
+</html>
