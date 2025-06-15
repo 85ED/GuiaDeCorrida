@@ -22,8 +22,8 @@ async function enviarEmail(destinatario, assunto, conteudo) {
 
     console.log(`E-mail enviado para ${destinatario}`);
   } catch (erro) {
-    console.error('Erro ao enviar e-mail:', erro);
-    throw erro; 
+    console.error('❌ Erro ao enviar e-mail:', erro);
+    throw erro;
   }
 }
 
