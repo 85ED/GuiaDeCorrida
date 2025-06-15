@@ -601,3 +601,36 @@ footer a:hover {
 .velocidade:hover {
     background-color: #e67000;
 }
+
+.input.erro {
+  border: 2px solid red;
+}
+
+.hidden {
+  display: none;
+}
+
+.botao-recuperar {
+  background-color: transparent;
+  color: #0cc0df;
+  border: none;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.botao-recuperar:hover {
+  color: #0993a9;
+}
+
+#areaRecuperacao {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+#areaRecuperacao .input {
+  margin-bottom: 10px;
+}

@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadastro e Login</title>
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="icon" href="./img/gc.png" type="GC">
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="icon" href="./img/gc.png" type="GC" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <style>
     .hidden {
       display: none;
     }
   </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <script src="./js/sessao.js"></script>
 </head>
 
 <body class="corpo">
@@ -22,7 +20,7 @@
   <header>
     <div class="wrapper">
       <div class="logo">
-        <a href="index.html"><img src="./img/logo.png" alt="Guia de Corrida"></a>
+        <a href="index.html"><img src="./img/logo.png" alt="Guia de Corrida" /></a>
       </div>
       <nav>
         <ul id="menu">
@@ -39,7 +37,7 @@
 
   <div class="containerAll containerAllCadastro">
     <div class="containerImagem">
-      <img src="./img/66.jpg" class="imagem-logo-cadastro" alt="Logo do site">
+      <img src="./img/66.jpg" class="imagem-logo-cadastro" alt="Logo do site" />
     </div>
 
     <!-- cadastro -->
@@ -48,22 +46,25 @@
       <span class="linha-fina linha-fina-cadastro"></span>
 
       <label class="label">Nome Completo*</label>
-      <input type="text" class="input" id="iptNome" placeholder="Nome Sobrenome">
+      <input type="text" class="input" id="iptNome" placeholder="Nome Sobrenome" />
 
       <label class="label">E-mail*</label>
-      <input type="text" class="input" id="iptEmail" placeholder="nome@email.com.br">
+      <input type="text" class="input" id="iptEmail" placeholder="nome@email.com.br" />
 
       <label class="label">Telefone Celular*</label>
-      <input type="text" class="input" id="iptTelefone" placeholder="(00)0 0000-0000">
+      <input type="text" class="input" id="iptTelefone" placeholder="(00)0 0000-0000" />
 
       <label class="label">Senha*</label>
-      <input type="password" class="input" id="iptSenha">
+      <input type="password" class="input" id="iptSenha" />
 
       <label class="label">Confirmar Senha*</label>
-      <input type="password" class="input" id="iptConfirmacaoSenha">
+      <input type="password" class="input" id="iptConfirmacaoSenha" />
 
       <button onclick="cadastro()" class="botao">CRIAR</button>
       <button onclick="mostrarLogin()" class="botao botao-jatenho-conta">JÁ POSSUO CADASTRO</button>
+
+      <div id="mensagem_erro_cadastro" style="display: none; color: red; margin-top: 10px;"></div>
+      <div id="mensagem_sucesso_cadastro" style="display: none; color: green; margin-top: 10px;"></div>
     </div>
 
     <!-- login -->
@@ -72,164 +73,33 @@
       <span class="linha-fina linha-fina-cadastro"></span>
 
       <label class="label">Email</label>
-      <input type="text" class="input" id="loginEmail">
+      <input type="text" class="input" id="loginEmail" />
 
       <label class="label">Senha</label>
-      <input type="password" class="input" id="loginSenha">
+      <input type="password" class="input" id="loginSenha" />
 
       <button onclick="fazerLogin()" class="botao">ENTRAR</button>
       <button onclick="mostrarCadastro()" class="botao botao-jatenho-conta">VOLTAR AO CADASTRO</button>
-      <div id="mensagem_erro" style="display: none; color: red;"></div>
-      <div id="mensagem_sucesso" style="display: none; color: green;"></div>
 
+      <!-- botão de recuperação -->
+      <div id="bloco_botao_recuperar">
+        <button onclick="mostrarRecuperacao()" class="botao-recuperar" type="button">Esqueci minha senha</button>
+      </div>
 
-      <div id="mensagem_login" style="color: green; margin-top: 10px;"></div>
+      <!-- Área de recuperação -->
+      <div id="areaRecuperacao" class="hidden" style="margin-top: 15px;">
+        <label class="label">Digite seu e-mail cadastrado</label>
+        <input type="text" class="input" id="recuperarEmail" placeholder="email@exemplo.com.br" />
+        <button onclick="recuperarSenha()" class="botao" type="button">Enviar recuperação</button>
+        <div id="mensagem_recuperacao" style="display: none; margin-top: 10px;"></div>
+      </div>
 
+      <div id="mensagem_erro_login" style="display: none; color: red; margin-top: 10px;"></div>
+      <div id="mensagem_sucesso_login" style="display: none; color: green; margin-top: 10px;"></div>
     </div>
   </div>
 
   <hr size="4px" color="#0cc0df" class="linha-baixo-cadastro" />
-
-  <script>
-  // Função que mostra o formulário de login e esconde o de cadastro
-  function mostrarLogin() {
-    document.getElementById("formCadastro").style.display = "none"; // esconde o cadastro
-    document.getElementById("formLogin").style.display = "flex";   // mostra o login
-
-    // Limpa mensagens ao trocar de aba
-    esconderMensagens();
-  }
-
-  // Função que mostra o formulário de cadastro e esconde o de login
-  function mostrarCadastro() {
-    document.getElementById("formLogin").style.display = "none";    // esconde o login
-    document.getElementById("formCadastro").style.display = "flex"; // mostra o cadastro
-
-    // Limpa mensagens ao trocar de aba
-    esconderMensagens();
-  }
-
-  // Função para esconder mensagens na tela (erro ou sucesso)
-  function esconderMensagens() {
-    document.getElementById("mensagem_erro").style.display = "none";
-    document.getElementById("mensagem_sucesso").style.display = "none";
-  }
-
-  function cadastro() {
-    // Pegamos os valores digitados nos campos de cadastro
-    const dados = {
-      nome: document.getElementById("iptNome").value.trim(),
-      email: document.getElementById("iptEmail").value.trim(),
-      telefone: document.getElementById("iptTelefone").value.trim(),
-      senha: document.getElementById("iptSenha").value,
-      confirmacaoSenha: document.getElementById("iptConfirmacaoSenha").value
-    };
-
-    // Verifica se os campos obrigatórios foram preenchidos
-    if (!dados.nome || !dados.email || !dados.telefone || !dados.senha) {
-      mostrarErro("Preencha todos os campos obrigatórios!");
-      return false;
-    }
-
-    // Verifica se a senha e a confirmação são iguais
-    if (dados.senha !== dados.confirmacaoSenha) {
-      mostrarErro("As senhas não coincidem!");
-      return false;
-    }
-
-    // Enviamos os dados para o servidor
-    fetch('http://localhost:3000/usuarios/cadastrar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dados)
-    })
-      .then(function (response) {
-        return response.json().then(function (resultado) {
-          if (!response.ok) {
-            // Se o servidor respondeu com erro
-            throw resultado;
-          }
-
-          // Mostra mensagem de sucesso e troca para login
-          mostrarSucesso("Cadastro realizado com sucesso!");
-          alert("Cadastro realizado com sucesso!");
-          mostrarLogin();
-        });
-      })
-      .catch(function (error) {
-        // Mostra mensagem de erro
-        mostrarErro(error.error || "Erro durante o cadastro");
-      });
-  }
-
-  // Função de login sem async/await
-  function fazerLogin() {
-    // Pegamos os dados do formulário de login
-    const dados = {
-      email: document.getElementById("loginEmail").value.trim(),
-      senha: document.getElementById("loginSenha").value
-    };
-
-    if (!dados.email || !dados.senha) {
-      mostrarErro("Preencha todos os campos para login.");
-      return false;
-    }
-
-    // Enviamos os dados de login ao servidor
-    fetch('http://localhost:3000/usuarios/autenticar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dados)
-    })
-      .then(function (response) {
-        return response.json().then(function (resultado) {
-          if (resultado.success && resultado.usuario) {
-            // Guardamos os dados do usuário no navegador
-            sessionStorage.NOME_USUARIO = resultado.usuario.nome;
-            sessionStorage.EMAIL_USUARIO = resultado.usuario.email;
-            sessionStorage.ID_USUARIO = resultado.usuario.idUsuario;
-
-            // Mostra que o login deu certo
-            mostrarSucesso("Login realizado! Redirecionando...");
-
-            // Espera 2 segundos e redireciona
-            setTimeout(function () {
-              window.location.href = "/pre_dashboard.html";
-            }, 2000);
-          } else {
-            throw resultado;
-          }
-        });
-      })
-      .catch(function (error) {
-        mostrarErro(error.error || "Falha no login.");
-      });
-  }
-
-  // Exibe uma mensagem de erro na tela
-  function mostrarErro(msg) {
-    var div = document.getElementById("mensagem_erro");
-    div.innerHTML = msg;
-    div.style.display = "block";
-
-    // Esconde depois de 5 segundos
-    setTimeout(function () {
-      div.style.display = "none";
-    }, 5000);
-  }
-
-  // Exibe uma mensagem de sucesso na tela
-  function mostrarSucesso(msg) {
-    var div = document.getElementById("mensagem_sucesso");
-    div.innerHTML = msg;
-    div.style.display = "block";
-
-    // Esconde depois de 5 segundos
-    setTimeout(function () {
-      div.style.display = "none";
-    }, 5000);
-  }
-</script>
 
   <footer>
     <h2 style="color: white; font-size: 15px;">Projeto Desenvolvido por Edson Felix – SPTECH</h2>
@@ -247,12 +117,6 @@
     </div>
   </footer>
 
+  <script src="./js/login.js"></script>
 </body>
-
-</html>
-
-
-
-</body>
-
 </html>

@@ -1,5 +1,3 @@
-// src/routes/provas.js
-
 const express = require('express');
 const router = express.Router();
 const provaModel = require('../models/provaModel');
