@@ -129,7 +129,7 @@ function cadastro() {
   }
 
   /* ==== Envio ao backend ==== */
-  fetch("http://localhost:3000/usuarios/cadastrar", {
+  fetch("https://guiadecorrida.onrender.com/usuarios/cadastrar", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(dados),
