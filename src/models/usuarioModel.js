@@ -8,7 +8,10 @@ const pool = mysql.createPool({
   database: process.env.DB_DATABASE,
   port: Number(process.env.DB_PORT),
   waitForConnections: true,
-  connectionLimit: 10
+  connectionLimit: 10,
+  ssl: {
+    rejectUnauthorized: true
+  }
 });
 
 // --- FUNÇÕES AUXILIARES ---
@@ -86,6 +89,8 @@ module.exports = {
       connection.release();
     }
   },
+
+  
 
   buscarPorEmail,
   salvarTokenRecuperacao,
