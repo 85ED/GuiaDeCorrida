@@ -497,3 +497,8 @@ function carregarProvasGravadas() {
       console.error("Erro ao buscar provas do usuário:", erro);
     });
 }
+
+function toggleMenu() {
+  var menu = document.getElementById('menu');
+  menu.classList.toggle('show');
+}

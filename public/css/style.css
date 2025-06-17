@@ -634,3 +634,42 @@ footer a:hover {
 #areaRecuperacao .input {
   margin-bottom: 10px;
 }
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.menu-toggle span {
+    height: 3px;
+    width: 25px;
+    background-color: white;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+    #menu {
+        display: none;
+        flex-direction: column;
+        background-color: #000080;
+        position: absolute;
+        top: 70px;
+        right: 5%;
+        width: 200px;
+        padding: 10px;
+        border-radius: 6px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        z-index: 1000;
+    }
+
+    #menu.show {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+}
