@@ -16,6 +16,11 @@
       <div class="logo">
         <a href="index.html"><img src="./img/logo.png" alt="Guia de Corrida" /></a>
       </div>
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <nav>
         <ul id="menu">
           <li><a href="index.html#sobre">Sobre</a></li>
@@ -34,7 +39,8 @@
       <h2>Execução: correr com estratégia</h2><br>
       <p>No dia da corrida ou durante treinos-chave, a <strong>execução</strong> faz toda a diferença. Saber administrar
         o ritmo, respeitar os sinais do corpo e aplicar as estratégias certas pode transformar sua prova em uma
-        <em>experiência vitoriosa</em> ou uma frustração.</p>
+        <em>experiência vitoriosa</em> ou uma frustração.
+      </p>
       <p>Algo pouco conhecido é que, durante a corrida, o corpo libera <strong>neuropeptídeos</strong> que influenciam
         diretamente a percepção de esforço e dor, por isso, sua mente pode ser a maior aliada ou inimiga na performance.
         Aprender a controlar essa resposta mental é tão crucial quanto o preparo físico.</p>
@@ -81,7 +87,8 @@
   <footer>
     <h2 style="color: white; font-size: 15px;">Projeto Desenvolvido por Edson Felix – SPTECH</h2>
     <h2 style="color: white; font-size: 15px;">Fale Conosco: edson.marques@sptech.school </h2>
-    <a href="https://github.com/85ED/GuiaDeCorrida/blob/main/Documenta%C3%A7%C3%A3o/Pol%C3%ADtica%20de%20Privacidade.pdf" class="politica" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>
+    <a href="https://github.com/85ED/GuiaDeCorrida/blob/main/Documenta%C3%A7%C3%A3o/Pol%C3%ADtica%20de%20Privacidade.pdf"
+      class="politica" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>
     <br><br>
     <div class="redes">
       <a href="https://www.linkedin.com/in/code85ed/" class="social-link" target="_blank" rel="noopener noreferrer">
@@ -92,27 +99,11 @@
       </a>
     </div>
   </footer>
+  <script src="./js/graficos.js"></script>
 </body>
 
 </html>
 
-<script>
-  function pace() {
-    var distancia = Number(ipt_distancia.value);
-    var tempo = Number(ipt_tempo.value);
 
-    if (distancia > 0 && tempo > 0) {
-      var pace_corrida = tempo / distancia;
-      var minutos = Math.floor(pace_corrida);
-      var segundos = Math.round((pace_corrida - minutos) * 60);
 
-      // segundos com 2 dígitos
-      segundos = segundos.toString().padStart(2, '0');
-
-      txt.innerHTML = `Seu pace é de <strong>${minutos}:${segundos} min/km</strong>.`;
-    } else {
-      txt.innerHTML = "<span style='color:red;'>Por favor, insira valores válidos para distância e tempo.</span>";
-    }
-  }
-</script>
 </script>

@@ -547,13 +547,13 @@ footer a:hover {
 }
 
 #formLogin {
-  display: none;
+    display: none;
 }
 
 #formCadastro {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .tooltip {
@@ -604,36 +604,36 @@ footer a:hover {
 }
 
 .input.erro {
-  border: 2px solid red;
+    border: 2px solid red;
 }
 
 .hidden {
-  display: none;
+    display: none;
 }
 
 .botao-recuperar {
-  background-color: transparent;
-  color: #0cc0df;
-  border: none;
-  font-size: 14px;
-  text-decoration: underline;
-  cursor: pointer;
-  margin-top: 15px;
+    background-color: transparent;
+    color: #0cc0df;
+    border: none;
+    font-size: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 15px;
 }
 
 .botao-recuperar:hover {
-  color: #0993a9;
+    color: #0993a9;
 }
 
 #areaRecuperacao {
-  background-color: #f7f7f7;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px;
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
 }
 
 #areaRecuperacao .input {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .menu-toggle {
@@ -641,6 +641,10 @@ footer a:hover {
     flex-direction: column;
     cursor: pointer;
     gap: 5px;
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .menu-toggle span {
@@ -657,12 +661,11 @@ footer a:hover {
         flex-direction: column;
         background-color: #000080;
         position: absolute;
-        top: 70px;
-        right: 5%;
-        width: 200px;
-        padding: 10px;
-        border-radius: 6px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        top: 100%;
+        right: 0;
+        width: 100%;
+        padding: 20px 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         z-index: 1000;
     }
 

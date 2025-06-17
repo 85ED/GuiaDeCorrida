@@ -17,6 +17,11 @@
       <div class="logo">
         <a href="index.html"><img src="./img/logo.png" alt="Guia de Corrida"></a>
       </div>
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <nav>
         <ul id="menu">
           <li><a href="index.html#sobre">Sobre</a></li>
@@ -72,7 +77,8 @@
     <h2 style="color: white; font-size: 15px;">Projeto Desenvolvido por Edson Felix – SPTECH</h2>
     <h2 style="color: white; font-size: 15px;">Fale Conosco: edson.marques@sptech.school </h2>
 
-    <a href="https://github.com/85ED/GuiaDeCorrida/blob/main/Documenta%C3%A7%C3%A3o/Pol%C3%ADtica%20de%20Privacidade.pdf" class="politica" target="_blank" rel="noopener noreferrer">Política de Privacidade</a><br>
+    <a href="https://github.com/85ED/GuiaDeCorrida/blob/main/Documenta%C3%A7%C3%A3o/Pol%C3%ADtica%20de%20Privacidade.pdf"
+      class="politica" target="_blank" rel="noopener noreferrer">Política de Privacidade</a><br>
     <br>
     <div class="redes">
       <a href="https://www.linkedin.com/in/code85ed/" class="social-link" target="_blank" rel="noopener noreferrer">
@@ -84,32 +90,8 @@
     </div>
   </footer>
 
-  <script>
-    function verificarFormulario(event) {
-      event.preventDefault(); // Impede o envio padrão do formulário
+  <script src="./js/graficos.js"></script>
 
-      var nome = document.getElementById('nome').value;
-      var email = document.getElementById('email').value;
-      var mensagem = document.getElementById('mensagem').value;
-      var assunto = document.getElementById('assunto').value;
-
-      if (nome == "" || email == "" || mensagem == "" || assunto == "") {
-        alert("Por favor, preencha todos os campos.");
-        return false;
-      } else {
-        alert("Mensagem enviada com sucesso! Em breve entraremos em contato.");
-
-        document.getElementById('nome').value = "";
-        document.getElementById('email').value = "";
-        document.getElementById('mensagem').value = "";
-        document.getElementById('assunto').value = "";
-
-        return true;
-
-        // ver depois o site https://formsubmit.co/ e tentar substituir action="#" por um script 
-      }
-    }
-  </script>
 </body>
 
 </html>

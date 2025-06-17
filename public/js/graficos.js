@@ -502,3 +502,46 @@ function toggleMenu() {
   var menu = document.getElementById('menu');
   menu.classList.toggle('show');
 }
+
+ function verificarFormulario(event) {
+      event.preventDefault(); // Impede o envio padrão do formulário
+
+      var nome = document.getElementById('nome').value;
+      var email = document.getElementById('email').value;
+      var mensagem = document.getElementById('mensagem').value;
+      var assunto = document.getElementById('assunto').value;
+
+      if (nome == "" || email == "" || mensagem == "" || assunto == "") {
+        alert("Por favor, preencha todos os campos.");
+        return false;
+      } else {
+        alert("Mensagem enviada com sucesso! Em breve entraremos em contato.");
+
+        document.getElementById('nome').value = "";
+        document.getElementById('email').value = "";
+        document.getElementById('mensagem').value = "";
+        document.getElementById('assunto').value = "";
+
+        return true;
+
+        // ver depois o site https://formsubmit.co/ e tentar substituir action="#" por um script 
+      }
+    }
+
+      function pace() {
+    var distancia = Number(ipt_distancia.value);
+    var tempo = Number(ipt_tempo.value);
+
+    if (distancia > 0 && tempo > 0) {
+      var pace_corrida = tempo / distancia;
+      var minutos = Math.floor(pace_corrida);
+      var segundos = Math.round((pace_corrida - minutos) * 60);
+
+      // segundos com 2 dígitos
+      segundos = segundos.toString().padStart(2, '0');
+
+      txt.innerHTML = `Seu pace é de <strong>${minutos}:${segundos} min/km</strong>.`;
+    } else {
+      txt.innerHTML = "<span style='color:red;'>Por favor, insira valores válidos para distância e tempo.</span>";
+    }
+  }
