@@ -1,0 +1,55 @@
+-- MySQL dump 10.13  Distrib 8.0.41, for macos15 (x86_64)
+--
+-- Host: localhost    Database: corrida
+-- ------------------------------------------------------
+-- Server version	9.2.0
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `recuperacao_senha`
+--
+
+DROP TABLE IF EXISTS `recuperacao_senha`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recuperacao_senha` (
+  `idrecuperacao` int NOT NULL AUTO_INCREMENT,
+  `idusuario` int NOT NULL,
+  `token` varchar(100) NOT NULL,
+  `expiracao` datetime NOT NULL,
+  PRIMARY KEY (`idrecuperacao`),
+  KEY `idusuario` (`idusuario`),
+  CONSTRAINT `recuperacao_senha_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `recuperacao_senha`
+--
+
+LOCK TABLES `recuperacao_senha` WRITE;
+/*!40000 ALTER TABLE `recuperacao_senha` DISABLE KEYS */;
+INSERT INTO `recuperacao_senha` VALUES (1,21,'e2b5619697701b4f38d26dff00341221745c27aeac9832c6e978ddd4ce96e58a','2025-06-15 21:04:36'),(2,21,'77add0837f557abe3def487452d0f99701d22ebcff7bbccb2b6ec53086594d05','2025-06-15 21:08:32'),(3,21,'ee6a14e51e7e81057b12039fbd3b0f2c4cff058f5fd3a35b568af4fc00e8629c','2025-06-15 21:10:04'),(4,21,'347b676a34e20646b3701013cdc1f163af36b2f3db1668cde7e6f61271ed5a28','2025-06-15 21:13:57'),(5,21,'aab9fb352a1f57a2d185a24860d921e4e7a8c0b38fcecc77c3b76560b1b6bb61','2025-06-15 21:17:11'),(6,21,'30c9b9aee412366d38c422ece69ad2214d12569c6a03bde600230dbed12b6ed2','2025-06-15 21:24:27'),(7,21,'8bafbe2ed1b292bab44547ed0b32840aec8f064dbf59a904c2a56ed1b04c4845','2025-06-15 21:24:31'),(8,21,'6895263785f89f02f898c59f158974710078e2bbb9f3088169e4fe86098f396d','2025-06-15 21:24:33'),(9,21,'2d12ad32d7d76ba7c8485b1ccb8210da053bd19970b55fe7c4e6d06280d2f937','2025-06-15 21:29:54');
+/*!40000 ALTER TABLE `recuperacao_senha` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2025-06-18 21:54:35

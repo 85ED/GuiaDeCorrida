@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000'; // ou sua URL real em produção
+const API_URL = 'https://guiadecorrida-production.up.railway.app';
 
 /* ===== Troca de telas ===== */
 function mostrarLogin() {
@@ -53,16 +53,10 @@ function mostrarSucessoLogin(msg) {
 /* ===== Destacar campo com erro ===== */
 function marcarErroCampo(idInput) {
   const campo = document.getElementById(idInput);
-  campo.classList.add("erro"); // classe .erro -> borda vermelha (definida no CSS)
-
-  /* Ao começar a digitar, remove o destaque */
-  campo.addEventListener(
-    "input",
-    () => {
-      campo.classList.remove("erro");
-    },
-    { once: true }
-  );
+  campo.classList.add("erro");
+  campo.addEventListener("input", () => {
+    campo.classList.remove("erro");
+  }, { once: true });
 }
 
 /* ===== Cadastro ===== */
@@ -121,28 +115,25 @@ function cadastro() {
 
   const regexSenha = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
   if (!regexSenha.test(dados.senha)) {
-    mostrarErroCadastro(
-      "A senha deve ter 8+ caracteres, 1 letra maiúscula, 1 número e 1 símbolo."
-    );
+    mostrarErroCadastro("A senha deve ter 8+ caracteres, 1 letra maiúscula, 1 número e 1 símbolo.");
     marcarErroCampo("iptSenha");
     return;
   }
 
-  /* ==== Envio ao backend ==== */
-  fetch("https://guiadecorrida.onrender.com/usuarios/cadastrar", {
+  fetch(`${API_URL}/usuarios/cadastrar`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(dados),
   })
-    .then((response) =>
-      response.json().then((resultado) => {
+    .then(response =>
+      response.json().then(resultado => {
         if (!response.ok) throw resultado;
         mostrarSucessoCadastro("Cadastro realizado com sucesso!");
         alert("Cadastro realizado com sucesso!");
         mostrarLogin();
       })
     )
-    .catch((error) =>
+    .catch(error =>
       mostrarErroCadastro(error.error || "Erro durante o cadastro.")
     );
 }
@@ -166,13 +157,13 @@ function fazerLogin() {
     return;
   }
 
-  fetch("https://guiadecorrida.onrender.com/usuarios/autenticar", {
+  fetch(`${API_URL}/usuarios/autenticar`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(dados),
   })
-    .then((response) =>
-      response.json().then((resultado) => {
+    .then(response =>
+      response.json().then(resultado => {
         if (resultado.success && resultado.usuario) {
           sessionStorage.NOME_USUARIO = resultado.usuario.nome;
           sessionStorage.EMAIL_USUARIO = resultado.usuario.email;
@@ -185,9 +176,10 @@ function fazerLogin() {
         }
       })
     )
-    .catch((error) => mostrarErroLogin(error.error || "Falha no login."));
+    .catch(error => mostrarErroLogin(error.error || "Falha no login."));
 }
 
+/* ===== Recuperação de Senha ===== */
 function mostrarRecuperacao() {
   document.getElementById("bloco_botao_recuperar").style.display = "none";
   document.getElementById("areaRecuperacao").classList.remove("hidden");
@@ -204,7 +196,6 @@ function recuperarSenha() {
     return;
   }
 
-  // validação básica de e-mail
   const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailValido.test(email)) {
     divMsg.innerHTML = "Formato de e-mail inválido.";
@@ -213,7 +204,6 @@ function recuperarSenha() {
     return;
   }
 
-  // (simulação) requisição futura
   fetch(`${API_URL}/usuarios/recuperar-senha`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

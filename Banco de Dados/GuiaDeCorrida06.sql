@@ -159,6 +159,8 @@ CREATE TABLE provas_json (
   CONSTRAINT chk_modalidade CHECK (modalidade IN ('Montanha', 'Asfalto'))
 );
 
+select * from provas_json;
+
 INSERT INTO provas_json (nome, distancia, data_prova, altimetria, modalidade) VALUES
 ('Maratona de Boston - Estados Unidos', 42.195, '2026-04-21', 250, 'Asfalto'),
 ('Maratona de Londres - Reino Unido', 42.195, '2026-04-27', 100, 'Asfalto'),
