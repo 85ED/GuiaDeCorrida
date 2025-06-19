@@ -1,4 +1,7 @@
-const API_URL = 'https://guiadecorrida-production.up.railway.app';
+// Define a URL da API com base no ambiente
+const API_URL = window.location.hostname.includes("vercel.app")
+  ? "https://guiadecorrida-production.up.railway.app"
+  : "http://localhost:3000";
 
 /* ===== Troca de telas ===== */
 function mostrarLogin() {
@@ -54,9 +57,14 @@ function mostrarSucessoLogin(msg) {
 function marcarErroCampo(idInput) {
   const campo = document.getElementById(idInput);
   campo.classList.add("erro");
-  campo.addEventListener("input", () => {
-    campo.classList.remove("erro");
-  }, { once: true });
+
+  campo.addEventListener(
+    "input",
+    () => {
+      campo.classList.remove("erro");
+    },
+    { once: true }
+  );
 }
 
 /* ===== Cadastro ===== */
@@ -115,7 +123,9 @@ function cadastro() {
 
   const regexSenha = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
   if (!regexSenha.test(dados.senha)) {
-    mostrarErroCadastro("A senha deve ter 8+ caracteres, 1 letra maiúscula, 1 número e 1 símbolo.");
+    mostrarErroCadastro(
+      "A senha deve ter 8+ caracteres, 1 letra maiúscula, 1 número e 1 símbolo."
+    );
     marcarErroCampo("iptSenha");
     return;
   }
@@ -125,15 +135,15 @@ function cadastro() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(dados),
   })
-    .then(response =>
-      response.json().then(resultado => {
+    .then((response) =>
+      response.json().then((resultado) => {
         if (!response.ok) throw resultado;
         mostrarSucessoCadastro("Cadastro realizado com sucesso!");
         alert("Cadastro realizado com sucesso!");
         mostrarLogin();
       })
     )
-    .catch(error =>
+    .catch((error) =>
       mostrarErroCadastro(error.error || "Erro durante o cadastro.")
     );
 }
@@ -162,8 +172,8 @@ function fazerLogin() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(dados),
   })
-    .then(response =>
-      response.json().then(resultado => {
+    .then((response) =>
+      response.json().then((resultado) => {
         if (resultado.success && resultado.usuario) {
           sessionStorage.NOME_USUARIO = resultado.usuario.nome;
           sessionStorage.EMAIL_USUARIO = resultado.usuario.email;
@@ -176,10 +186,9 @@ function fazerLogin() {
         }
       })
     )
-    .catch(error => mostrarErroLogin(error.error || "Falha no login."));
+    .catch((error) => mostrarErroLogin(error.error || "Falha no login."));
 }
 
-/* ===== Recuperação de Senha ===== */
 function mostrarRecuperacao() {
   document.getElementById("bloco_botao_recuperar").style.display = "none";
   document.getElementById("areaRecuperacao").classList.remove("hidden");
